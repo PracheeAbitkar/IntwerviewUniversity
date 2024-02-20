@@ -504,9 +504,9 @@ export default function InterviewPrep() {
     // });
   };
 
-  const viewSavedInterview = (id) => {
+  const viewSavedInterview = (id,role) => {
 
-    navigate(`/viewsavedsession/:${id}`);
+    navigate(`/viewsavedsession/:${id}/:${role}`);
 
   }
 
@@ -563,7 +563,7 @@ export default function InterviewPrep() {
                         <span className="savedText">{item.role}</span>
                         <span className="cursor">
                           <Image
-                            onClick={() => viewSavedInterview(item.id)}
+                            onClick={() => viewSavedInterview(item.id,item.role)}
                             src={view}
                             className="viewImage"
                           />

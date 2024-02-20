@@ -116,7 +116,10 @@
   height: 80px;
 }
 
-
+.form-control.is-invalid, .was-validated .form-control:invalid {
+ 
+  background-image: none !important;
+}
 
 @media (max-width:991px) {
 

@@ -81,42 +81,44 @@ export default function SignUp() {
 
         const inputPassword = event.target.value;
         setPassword(inputPassword);
-        const validationErrors = {};
-        if (!isPasswordValid(inputPassword)) {
-            console.log("inputPassword.length",inputPassword.length)
-            if (!isNameValid(name)) {
-                validationErrors.name = "Please enter a valid user name.";
-            }
-            if (!isEmailValid(email)) {
-                validationErrors.email = "Please enter a valid email address.";
-            }
-            if(!/[A-Z]/.test(inputPassword)){
-                validationErrors.password = "Password must contain at least one uppercase letter.";
-            }
-            if(!/[@$!%*?&]/.test(inputPassword)){
-                validationErrors.password = "Password must contain at least one special character.";
-            }
-            if(!/[a-z]/.test(inputPassword)){
-                validationErrors.password = "Password must contain at least one lowercase letter.";
-            }
-            if(!/[0-9]/.test(inputPassword)){
-                validationErrors.password = "Password must contain at least one numeric number.";
-            }
-            if(inputPassword.length < 8){
-                validationErrors.password = "Password must be at least 8 characters long.";
-            }
-            if (!isConfirmPasswordValid(confirm_password)) {
-                validationErrors.confirm_password = "Please enter a valid password";
-            }
-            // if (!isPasswordMatches(confirm_password)) {
-            //     validationErrors.confirm_password_matches = "Password and Confirm does not match";
-            // }
-            if (Object.keys(validationErrors).length > 0) {
-                setErrors(validationErrors);
-                return;
-            }
+        // const validationErrors = {};
+        // if (!isPasswordValid(inputPassword)) {
+        //     console.log("inputPassword.length",inputPassword.length)
+        //     if (!isNameValid(name)) {
+        //         validationErrors.name = "Please enter a valid user name.";
+        //     }
+        //     if (!isEmailValid(email)) {
+        //         validationErrors.email = "Please enter a valid email address.";
+        //     }
+        //     if(!/[A-Z]/.test(inputPassword)){
+        //         validationErrors.password = "Password must contain at least one uppercase letter.";
+        //     }
+        //     if(!/[@$!%*?&]/.test(inputPassword)){
+        //         validationErrors.password = "Password must contain at least one special character.";
+        //     }
+        //     if(!/[a-z]/.test(inputPassword)){
+        //         validationErrors.password = "Password must contain at least one lowercase letter.";
+        //     }
+        //     if(!/[0-9]/.test(inputPassword)){
+        //         validationErrors.password = "Password must contain at least one numeric number.";
+        //     }
+        //     if(inputPassword.length < 8){
+        //         validationErrors.password = "Password must be at least 8 characters long.";
+        //     }
+        //     if (!isConfirmPasswordValid(confirm_password)) {
+        //         validationErrors.confirm_password = "Please enter a valid password";
+        //     }
+        //     // if (!isPasswordMatches(confirm_password)) {
+        //     //     validationErrors.confirm_password_matches = "Password and Confirm does not match";
+        //     // }
+        //     if (Object.keys(validationErrors).length > 0) {
+        //         setErrors(validationErrors);
+        //         return;
+        //     }
             
-        }else if (errors.password && inputPassword.trim().length > 8 && isPasswordValid(inputPassword)) {
+        // }else
+        
+        if (errors.password && inputPassword.trim().length > 8 && isPasswordValid(inputPassword)) {
             const updatedErrors = { ...errors };
             delete updatedErrors.password;
             setErrors(updatedErrors);
@@ -511,30 +513,32 @@ export default function SignUp() {
           }
 
         // Clear the error for password field if it becomes non-empty
-        const validationErrors = {};
-        if (!isConfirmPasswordValid(inputPassword)) {
-            console.log("test")
-            if (!isNameValid(name)) {
-                validationErrors.name = "Please enter a valid user name.";
-            }
-            if (!isEmailValid(email)) {
-                validationErrors.email = "Please enter a valid email address.";
-            }
-            if(inputPassword.length < 8){
-                validationErrors.confirm_password = "Password must be at least 8 characters long.";
-            }
-            if (!isPasswordValid(password)) {
-                validationErrors.password = "Please enter a valid password";
-            }
-            if (!isPasswordMatches(confirm_password)) {
-                validationErrors.confirm_password_matches = "Password and Confirm Password does not match";
-            }
-            if (Object.keys(validationErrors).length > 0) {
-                setErrors(validationErrors);
-                return;
-            }
+        // const validationErrors = {};
+        // if (!isConfirmPasswordValid(inputPassword)) {
+        //     console.log("test")
+        //     if (!isNameValid(name)) {
+        //         validationErrors.name = "Please enter a valid user name.";
+        //     }
+        //     if (!isEmailValid(email)) {
+        //         validationErrors.email = "Please enter a valid email address.";
+        //     }
+        //     if(inputPassword.length < 8){
+        //         validationErrors.confirm_password = "Password must be at least 8 characters long.";
+        //     }
+        //     if (!isPasswordValid(password)) {
+        //         validationErrors.password = "Please enter a valid password";
+        //     }
+        //     if (!isPasswordMatches(confirm_password)) {
+        //         validationErrors.confirm_password_matches = "Password and Confirm Password does not match";
+        //     }
+        //     if (Object.keys(validationErrors).length > 0) {
+        //         setErrors(validationErrors);
+        //         return;
+        //     }
             
-        }else if (errors.confirm_password && inputPassword.trim().length > 8 && isConfirmPasswordValid(inputPassword)) {
+        // }else 
+        
+        if (errors.confirm_password && inputPassword.trim().length > 8 && isConfirmPasswordValid(inputPassword)) {
             const updatedErrors = { ...errors };
             delete updatedErrors.confirm_password_matches;
             delete updatedErrors.confirm_password;

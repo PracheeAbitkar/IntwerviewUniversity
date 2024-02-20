@@ -73,6 +73,7 @@ export default function Account() {
     const handleSelect = (event) => {
         if(event.target.value === "Others"){
          setOtherGender(true)
+         setgender("")
         }
         else{
             setOtherGender(false)
@@ -312,7 +313,7 @@ export default function Account() {
                                                     value={gender}
                                                     onChange={handleSelect}
                                                 >
-                                                    <option value="">Select Gender</option>
+                                                    <option value="">{otherGender ?"Other Gender":"Select Gender"}</option>
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                     <option value="Others">Others</option>

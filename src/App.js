@@ -57,7 +57,7 @@ function App() {
           <Route exact path='/resetPassword' element={<ResetPass />} />
           <Route exact path='/sidebar' element={<PrivateRoute element={<Sidebar />} />} />
           <Route exact path='/Favorite/:id' element={<PrivateRoute element={<Favorite />} />} />
-          <Route exact path='/viewsavedsession/:id' element={<PrivateRoute element={<ViewSavedSession />} />} />
+          <Route exact path='/viewsavedsession/:id/:role' element={<PrivateRoute element={<ViewSavedSession />} />} />
 
           <Route exact path='/contact' element={<Contact />} />
           <Route exact path='/faq' element={<Faq />} />
