@@ -313,7 +313,7 @@ export default function Header() {
               </span>
               <span>
                 <Button className='savebtn' type="submit" onClick={() => onLogout()}>Yes</Button>
-                <Button className='cancelbtn' style={{ marginLeft: 5 }} type="submit"  >No</Button>
+                <Button className='cancelbtn' style={{ marginLeft: 5 }} type="submit" onClick={handleClose1} >No</Button>
               </span>
             </div>
           </Modal.Body>

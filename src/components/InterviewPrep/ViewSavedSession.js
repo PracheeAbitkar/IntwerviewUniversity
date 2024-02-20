@@ -8,7 +8,7 @@ import ep_back from '../../assets/images/ep_back.png'
 import './InterviewQuestion.css'
 import { getQuestion, favoriteAnswer, helpme, saveInterviewSession, getInterviewSessionById } from '../../redux/authSlice'
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation,useParams } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import regen from '../../assets/images/regen.svg'
 import back from '../../assets/images/back.png'
 import Loader from './../../Loader';
@@ -32,6 +32,7 @@ export default function InterviewQuestion() {
     const [answerData, setanswerData] = useState('');
 
     const [answersData, setAnswersData] = useState([]);
+    const [favAnswer, setfavAnswer] = useState([]);
     const [allData, setAllData] = useState('')
 
     const location = useLocation();
@@ -43,14 +44,19 @@ export default function InterviewQuestion() {
         role: '',
         question_1: '',
         answer_1: '',
+        favourite_1: 'False',
         question_2: '',
         answer_2: '',
+        favourite_2: 'False',
         question_3: '',
         answer_3: '',
+        favourite_3: 'False',
         question_4: '',
         answer_4: '',
+        favourite_4: 'False',
         question_5: '',
         answer_5: '',
+        favourite_5: 'False',
 
     });
 
@@ -74,7 +80,7 @@ export default function InterviewQuestion() {
                 { questionValues?.filter((item) => item != '')?.map((item, i) => ((i == 0) ? setSelectedItem(item) : '')) }
                 setquestionData(questionValues)
 
-              
+
                 questionValues?.filter((item) => item != '')?.map((item, i) => (
                     setAnswers(prevAnswers => ({
                         ...prevAnswers,
@@ -82,17 +88,32 @@ export default function InterviewQuestion() {
                     }))
                 ))
 
-               
+
 
                 const answerValues = Object.keys(obj)
                     .filter(key => key.startsWith("answer"))
                     .map(questionKey => obj[questionKey]);
                 setAnswersData(answerValues)
+                console.log(answerValues, "answerValues")
+                { answerValues?.map((item, i) => ((i == 0) ? setInputAnswerData(item) : '')) }
+                { answerValues?.map((item, i) => ((i == 0) ? setEnablebtn(true) : '')) }
 
-                { answerValues?.filter((item) => item != '')?.map((item, i) => ((i == 0) ? setInputAnswerData(item) : '')) }
-                { answerValues?.filter((item) => item != '')?.map((item, i) => ((i == 0) ?  setEnablebtn(true) : '')) }
-               
-                answerValues?.filter((item) => item != '')?.map((item, i) => (
+
+                const favValues = Object.keys(obj)
+                    .filter(key => key.startsWith("favourite"))
+                    .map(questionKey => obj[questionKey]);
+
+                { favValues?.map((item, i) => ((i == 0) ? setIsClicked(item) : '')) }
+                setfavAnswer(favValues)
+
+                favValues?.map((item, i) => (
+                    setAnswers(prevAnswers => ({
+                        ...prevAnswers,
+                        [`favourite_${i + 1}`]: item
+                    }))
+                ))
+
+                answerValues?.map((item, i) => (
                     setAnswers(prevAnswers => ({
                         ...prevAnswers,
                         [`answer_${i + 1}`]: item
@@ -111,22 +132,27 @@ export default function InterviewQuestion() {
 
     const handleItemClick = (item, index) => {
        
-       
+
         if (answers.hasOwnProperty(`answer_${index}`)) {
-           // console.log(answers, "answers")
+            // console.log(answers, "answers")
             const ques = `answer_${index}`
-           
+            const fav = `favourite_${index}`
+
             settypeanswer(true)
             setInputAnswerData(answers[ques])
-            console.log(answers[ques],"answers.ques")
-            if (answers[ques] !='') {
+            console.log(answers[fav], "answers.fave")
+
+             setIsClicked(answers[fav])
+
+
+            if (answers[ques] != '') {
                 setEnablebtn(true)
             } else {
                 setEnablebtn(false)
             }
 
         } else {
-           
+
             // "answer_1" is not available in the object
             setanswerData('')
             setEnablebtn(false)
@@ -192,6 +218,11 @@ export default function InterviewQuestion() {
                 hideProgressBar: true,
             });
         } else {
+            const num = selectedItem.split('.')[0];
+            setAnswers(prevAnswers => ({
+                ...prevAnswers,
+                [`favourite_${num}`]: "true"
+            }));
             const body1 = {
                 "answer": answerData.length === 0 ? inputAnswerData : answerData.join(''),
                 "question": selectedItem,
@@ -226,10 +257,10 @@ export default function InterviewQuestion() {
 
     // Handler to update answer for a specific question
     const handleAnswerChange = (question, answer) => {
-        console.log(answer,"answer")
-        if(answer){
-        setEnablebtn(true)
-        }else{
+        console.log(answer, "answer")
+        if (answer) {
+            setEnablebtn(true)
+        } else {
             setEnablebtn(false)
         }
         const num = question.split('.')[0]
@@ -251,17 +282,17 @@ export default function InterviewQuestion() {
 
         const questionKeys = Object.keys(answers).filter(key => key.startsWith('question_'));
         const answerKeys = Object.keys(answers).filter(key => key.startsWith('answer_'));
-       const savedid=id.replace(":", "")
+        const savedid = id.replace(":", "")
         let config = {
             method: "PUT",
             url: `https://round-unit-43333.botics.co/savesessions/${savedid}/update/`,
             headers: {
-              "Content-Type": "application/json",
-              'Authorization': `token ${localStorage.getItem('token')}`
+                "Content-Type": "application/json",
+                'Authorization': `token ${localStorage.getItem('token')}`
             },
             data: answers
-          }
-          axios
+        }
+        axios
             .request(config)
             .then(response => {
                 setLoading(false)
@@ -272,14 +303,14 @@ export default function InterviewQuestion() {
                 });
             })
             .catch(error => {
-              window.scrollTo(0, 0)
-              if (error?.response?.status === 400) {
-                toast.error("Error", {
-                  position: toast.POSITION.TOP_RIGHT,
-                  autoClose: 2000,
-                  hideProgressBar: true,
-                });
-              }
+                window.scrollTo(0, 0)
+                if (error?.response?.status === 400) {
+                    toast.error("Error", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 2000,
+                        hideProgressBar: true,
+                    });
+                }
             })
 
         // /savesessions/{id}/update/
@@ -300,7 +331,7 @@ export default function InterviewQuestion() {
         //     .catch((error) => {
         //         console.log(error)
         //     });
-      
+
     }
     const [feedbackText, setfeedbackText] = useState('')
     const [isOpen, setIsOpen] = useState(false);
