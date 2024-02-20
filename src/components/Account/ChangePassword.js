@@ -72,11 +72,11 @@ const ChangePassword = () => {
       validationErrors.New_Pass = "Please enter a valid New Password";
     }
 
-    if (!isConfirmPasswordValid(confirm_password)) {
-      validationErrors.confirm_password = "Please enter a valid Confirm password";
+    if (!confirm_password) {
+      validationErrors.confirm_password = "Please enter a Confirm password";
     }
 
-    if (!isPasswordMatches(confirm_password)) {
+    if (confirm_password && !isPasswordMatches(confirm_password)) {
       validationErrors.confirm_password_matches =
         "New Password and Confirm Password does not match";
     }
