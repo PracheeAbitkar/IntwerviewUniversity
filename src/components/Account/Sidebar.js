@@ -163,7 +163,7 @@ export default function Sidebar() {
                         </span>
                         <span>
                             <Button className='savebtn' type="submit" onClick={() => onLogout()}>Yes</Button>
-                            <Button className='cancelbtn' style={{ marginLeft: 5 }} onClick={() => handleClose1()}  >No</Button>
+                            <Button className='cancelbtn' style={{ marginLeft: 5 }} onClick={handleClose1}  >No</Button>
                         </span>
                     </div>
                 </Modal.Body>

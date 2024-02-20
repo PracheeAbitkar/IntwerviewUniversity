@@ -39,14 +39,19 @@ export default function InterviewQuestion() {
         role: '',
         question_1: '',
         answer_1: '',
+        favourite_1:'False',
         question_2: '',
         answer_2: '',
+        favourite_2:'False',
         question_3: '',
         answer_3: '',
+        favourite_3:'False',
         question_4: '',
         answer_4: '',
+        favourite_4:'False',
         question_5: '',
         answer_5: '',
+        favourite_5:'False',
 
     });
 
@@ -225,6 +230,12 @@ export default function InterviewQuestion() {
                 hideProgressBar: true,
             });
         } else {
+            const num = selectedItem.split('.')[0];
+            setAnswers(prevAnswers => ({
+                ...prevAnswers,
+                [`favourite_${num}`]: "True"
+            }));
+            
             const body1 = {
                 "answer": answerData.length === 0 ? inputAnswerData : answerData.join(''),
                 "question": selectedItem,

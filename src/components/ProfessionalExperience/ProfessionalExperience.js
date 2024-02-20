@@ -103,6 +103,7 @@ export default function ProfessionalExperience() {
             [name]: value
         }));
     };
+   
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
@@ -115,6 +116,13 @@ export default function ProfessionalExperience() {
             if (experience != '') {
                 formData.experience = experience
             }
+            // desired_job_role: '',
+            // preferred_industry: '',
+            // experience: '',
+            // job_location: '',
+            // career_goal: '',
+            // remote_option: '',
+          
             formData.remote_option = remote
             console.log(formData, "formData")
 
@@ -403,7 +411,7 @@ export default function ProfessionalExperience() {
                             <Form.Label className="text-start labelcss">  Career Goals</Form.Label>
                             <Form.Group controlId="exampleForm.ControlTextarea1">
 
-                                <Form.Control as="textarea" required name='career_goal'
+                                <Form.Control as="textarea"  name='career_goal'
                                     defaultValue={item.career_goal} onChange={handleChange}
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter  Career Goals</Form.Control.Feedback>
@@ -456,7 +464,6 @@ export default function ProfessionalExperience() {
                                     type='text'
                                     name='desired_job_role'
                                     onChange={handleChange}
-                                    required
                                 />
                                 <Form.Control.Feedback type="invalid">Please desired Job Role</Form.Control.Feedback>
                             </Form.Group>
@@ -468,7 +475,6 @@ export default function ProfessionalExperience() {
                                     type='text'
                                     name='industry'
                                     onChange={handleChange}
-                                    required
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter preferred industry</Form.Control.Feedback>
                             </Form.Group>
@@ -484,7 +490,6 @@ export default function ProfessionalExperience() {
                                     type='text'
                                     name='experience'
                                     onChange={handleChange}
-                                    required
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter experience</Form.Control.Feedback>
                             </Form.Group>
@@ -496,7 +501,6 @@ export default function ProfessionalExperience() {
                                     type='text'
                                     name='location'
                                     onChange={handleChange}
-                                    required
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter Job Location</Form.Control.Feedback>
                             </Form.Group>
@@ -508,7 +512,7 @@ export default function ProfessionalExperience() {
                         <Form.Label className="text-start labelcss">  Career Goals</Form.Label>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
 
-                            <Form.Control as="textarea" rows={5} required onChange={handleChange}
+                            <Form.Control as="textarea" rows={5}  onChange={handleChange}
                             />
                             <Form.Control.Feedback type="invalid">Please enter  Career Goals</Form.Control.Feedback>
                         </Form.Group>
@@ -545,7 +549,7 @@ export default function ProfessionalExperience() {
 
                     <span className='d-flex ms-auto  justify-content-end pb-3'>
 
-                        <Button className='savebtn' type="submit"  >Save</Button>
+                        <Button className='savebtn' type="submit" >Save</Button>
                         <Button className='cancelbtn ms-2 ' onClick={() => navigate("/interview")}  >Cancel</Button>
 
                     </span>
