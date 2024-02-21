@@ -160,7 +160,7 @@ export default function InterviewQuestion() {
         }
 
         setSelectedItem(item);
-        setIsClicked(false);
+        // setIsClicked(false);
 
         settypeanswer(true)
         setshowans(false)

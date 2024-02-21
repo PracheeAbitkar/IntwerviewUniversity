@@ -98,12 +98,15 @@ export default function ProfessionalExperience() {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+
         setFormData((prevData) => ({
             ...prevData,
             [name]: value
         }));
+
+       
     };
-   
+   const [enablebtn,setenablebtn]=useState(false)
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
@@ -123,6 +126,8 @@ export default function ProfessionalExperience() {
             // career_goal: '',
             // remote_option: '',
           
+        
+
             formData.remote_option = remote
             console.log(formData, "formData")
 
@@ -307,6 +312,7 @@ export default function ProfessionalExperience() {
     const handleSelect = (event) => {
 
         setExperience(event.target.value)
+        formData.experience = event.target.value
     };
 
     const handleOptionChecked = () => {
@@ -448,7 +454,13 @@ export default function ProfessionalExperience() {
 
                         <span className='d-flex ms-auto  justify-content-end pb-3'>
 
-                            <Button className='savebtn' type="submit"  >Save</Button>
+                            <Button className='savebtn' type="submit"  disabled={
+        formData.desired_job_role === '' &&
+        formData.preferred_industry === '' &&
+        formData.experience === '' &&
+        formData.job_location === '' &&
+        formData.career_goal === ''
+      }>Save</Button>
                             <Button className='cancelbtn ms-2 ' onClick={() => navigate("/interview")}>Cancel</Button>
 
                         </span>
@@ -549,7 +561,13 @@ export default function ProfessionalExperience() {
 
                     <span className='d-flex ms-auto  justify-content-end pb-3'>
 
-                        <Button className='savebtn' type="submit" >Save</Button>
+                        <Button className='savebtn' type="submit" disabled={
+        formData.desired_job_role === '' &&
+        formData.preferred_industry === '' &&
+        formData.experience === '' &&
+        formData.job_location === '' &&
+        formData.career_goal === ''
+      }>Save</Button>
                         <Button className='cancelbtn ms-2 ' onClick={() => navigate("/interview")}  >Cancel</Button>
 
                     </span>
