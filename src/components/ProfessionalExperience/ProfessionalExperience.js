@@ -68,7 +68,7 @@ export default function ProfessionalExperience() {
             .then((result) => {
 
                 console.log(result, "getresume")
-              
+
                 setResume(result?.payload?.file_name)
 
 
@@ -95,15 +95,42 @@ export default function ProfessionalExperience() {
     const handleTextAreaChange = (event) => {
         setPasteResume(event.target.value);
     };
-
+    const [enablebtn, setenablebtn] = useState(false)
     const handleChange = (event) => {
+
+        if (formData.desired_job_role != '' ||
+            formData.preferred_industry != '' ||
+            formData.experience != '' ||
+            formData.job_location != '' ||
+            formData.career_goal != '') {
+            console.log("abc")
+            setenablebtn(true)
+        }
+
         const { name, value } = event.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
+        if (event.target.name === 'career_goal') {
+            console.log('carreer')
+            const inputValue = event.target.value;
+            if (inputValue.length <= 10 * 1024 * 1024) {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    [name]: value
+                }));
+            } else {
+            }
+        } else {
+            console.log('other')
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value
+            }));
+        }
+
+
+
+
     };
-   
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
@@ -112,44 +139,46 @@ export default function ProfessionalExperience() {
 
         // const form = event.currentTarget;
         // if (form.checkValidity()) {
-            // Perform form submission or other actions here
-            if (experience != '') {
-                formData.experience = experience
-            }
-            // desired_job_role: '',
-            // preferred_industry: '',
-            // experience: '',
-            // job_location: '',
-            // career_goal: '',
-            // remote_option: '',
-          
-            formData.remote_option = remote
-            console.log(formData, "formData")
+        // Perform form submission or other actions here
+        if (experience != '') {
+            formData.experience = experience
+        }
+        // desired_job_role: '',
+        // preferred_industry: '',
+        // experience: '',
+        // job_location: '',
+        // career_goal: '',
+        // remote_option: '',
 
-            dispatch(updateExperience(formData))
+
+
+        formData.remote_option = remote
+        console.log(formData, "formData")
+
+        dispatch(updateExperience(formData))
             .then((result) => {
-                console.log(result,"result")
-                if(result?.payload?.error){
+                console.log(result, "result")
+                if (result?.payload?.error) {
                     toast.error(result?.payload?.error, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: 2000,
                         hideProgressBar: true,
                     });
-                }else{
+                } else {
                     toast.success('Data saved successfully', {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: 2000,
                         hideProgressBar: true,
                     });
                 }
-               
-        
-              })
-              .catch((error) => {
+
+
+            })
+            .catch((error) => {
                 console.log(error)
-              });
-        
-          
+            });
+
+
         // } else {
         //     event.stopPropagation();
         // }
@@ -305,8 +334,14 @@ export default function ProfessionalExperience() {
     // /initiation_questions/update_job_applicants/
     const handleShow = () => setupload(true);
     const handleSelect = (event) => {
+        if (event.target.value) {
+            setenablebtn(true)
+        } else {
+            setenablebtn(false)
+        }
 
         setExperience(event.target.value)
+        formData.experience = event.target.value
     };
 
     const handleOptionChecked = () => {
@@ -327,7 +362,7 @@ export default function ProfessionalExperience() {
             {/* <Col lg={8} className="mt-3 "> */}
             {proExperience.length > 0 ? <>
                 {proExperience?.map((item) => (
-                    <Form className="me-lg-5"  onSubmit={handleFormSubmit}>
+                    <Form className="me-lg-5" onSubmit={handleFormSubmit}>
                         <div className="row mb-3" >
                             <div className="col-sm">
                                 <Form.Group controlId="exampleForm.SelectCustom">
@@ -337,7 +372,7 @@ export default function ProfessionalExperience() {
                                         defaultValue={item.desired_job_role}
                                         name='desired_job_role'
                                         onChange={handleChange}
-                                        
+
                                     />
                                     <Form.Control.Feedback type="invalid">Please desired Job Role</Form.Control.Feedback>
                                 </Form.Group>
@@ -350,7 +385,7 @@ export default function ProfessionalExperience() {
                                         defaultValue={item.preferred_industry}
                                         name='preferred_industry'
                                         onChange={handleChange}
-                                        
+
                                     />
                                     <Form.Control.Feedback type="invalid">Please enter preferred industry</Form.Control.Feedback>
                                 </Form.Group>
@@ -384,7 +419,7 @@ export default function ProfessionalExperience() {
                                         defaultValue={item.job_location}
                                         name='job_location'
                                         onChange={handleChange}
-                                        
+
                                     />
                                     <Form.Control.Feedback type="invalid">Please enter Job Location</Form.Control.Feedback>
                                 </Form.Group>
@@ -411,7 +446,7 @@ export default function ProfessionalExperience() {
                             <Form.Label className="text-start labelcss">  Career Goals</Form.Label>
                             <Form.Group controlId="exampleForm.ControlTextarea1">
 
-                                <Form.Control as="textarea"  name='career_goal'
+                                <Form.Control as="textarea" name='career_goal'
                                     defaultValue={item.career_goal} onChange={handleChange}
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter  Career Goals</Form.Control.Feedback>
@@ -421,7 +456,7 @@ export default function ProfessionalExperience() {
                         <div className="col-sm-6 mb-3" style={{ paddingTop: 5 }}>
                             <Form.Group controlId="exampleForm.SelectCustom">
                                 <Form.Label className="text-start labelcss" style={{ display: 'flex', justifyContent: 'space-between' }}><span>Resume</span>
-                                    <span style={{ color: '#FF7F50', cursor: 'pointer' }} onClick={() => handleShow()}>Replace</span></Form.Label>
+                                    <span className={resume ? 'changecss' : 'disabled-span'} onClick={() => handleShow()}>Replace</span></Form.Label>
                                 <Form.Control
                                     type='text'
                                     className='textcontainer'
@@ -445,18 +480,22 @@ export default function ProfessionalExperience() {
                             </Form.Group>
 
                         </div>
-
+                        {/* formData.desired_job_role === '' &&
+                                formData.preferred_industry === '' &&
+                                formData.experience === '' &&
+                                formData.job_location === '' &&
+                                formData.career_goal === '' */}
                         <span className='d-flex ms-auto  justify-content-end pb-3'>
 
-                            <Button className='savebtn' type="submit"  >Save</Button>
+                            <Button className='savebtn' type="submit" disabled={!enablebtn}>Save</Button>
                             <Button className='cancelbtn ms-2 ' onClick={() => navigate("/interview")}>Cancel</Button>
 
                         </span>
                     </Form>
 
                 ))}</> :
-                <Form className="me-lg-5" noValidate validated={validated} onSubmit={handleFormSubmit}>
-                    <div className="row">
+                <Form className="me-lg-5" onSubmit={handleFormSubmit}>
+                    <div className="row mb-3" >
                         <div className="col-sm">
                             <Form.Group controlId="exampleForm.SelectCustom">
                                 <Form.Label className="text-start labelcss">Desired Job Role</Form.Label>
@@ -464,6 +503,7 @@ export default function ProfessionalExperience() {
                                     type='text'
                                     name='desired_job_role'
                                     onChange={handleChange}
+
                                 />
                                 <Form.Control.Feedback type="invalid">Please desired Job Role</Form.Control.Feedback>
                             </Form.Group>
@@ -473,8 +513,9 @@ export default function ProfessionalExperience() {
                                 <Form.Label className="text-start labelcss">Preferred Industry</Form.Label>
                                 <Form.Control
                                     type='text'
-                                    name='industry'
+                                    name='preferred_industry'
                                     onChange={handleChange}
+
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter preferred industry</Form.Control.Feedback>
                             </Form.Group>
@@ -482,15 +523,20 @@ export default function ProfessionalExperience() {
 
                     </div>
 
-                    <div className="row">
+                    <div className="row mb-3">
                         <div className="col-sm">
                             <Form.Group controlId="exampleForm.SelectCustom">
                                 <Form.Label className="text-start labelcss">Experience</Form.Label>
                                 <Form.Control
-                                    type='text'
-                                    name='experience'
-                                    onChange={handleChange}
-                                />
+                                    as="select"
+                                    name="experience"
+                                    onChange={handleSelect}
+                                >
+                                    <option value=""></option>
+                                    <option value="entry-level">Entry Level</option>
+                                    <option value="mid-career">Mid Career</option>
+                                    <option value="senior">Senior</option>
+                                </Form.Control>
                                 <Form.Control.Feedback type="invalid">Please enter experience</Form.Control.Feedback>
                             </Form.Group>
                         </div>
@@ -499,29 +545,46 @@ export default function ProfessionalExperience() {
                                 <Form.Label className="text-start labelcss">Job Location</Form.Label>
                                 <Form.Control
                                     type='text'
-                                    name='location'
+                                    name='job_location'
                                     onChange={handleChange}
+
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter Job Location</Form.Control.Feedback>
                             </Form.Group>
                         </div>
 
                     </div>
+                    <div className="row mb-2 account-row">
+                        <div className="col-sm-6"></div>
 
-                    <div className="row" >
+                        <div className="col-sm-3" style={{ paddingTop: 5 }}>
+                            <Form.Group controlId="exampleForm.SelectCustom">
+                                <Form.Check
+                                    type="checkbox"
+                                    className='labelcss1'
+                                    name="remote_option"
+                                    label="Remote"
+                                    checked={remote}
+                                    onChange={handleOptionChecked}
+                                />
+                            </Form.Group>
+                        </div></div>
+
+                    <div className="row mb-3" >
                         <Form.Label className="text-start labelcss">  Career Goals</Form.Label>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
 
-                            <Form.Control as="textarea" rows={5}  onChange={handleChange}
+                            <Form.Control as="textarea" name='career_goal'
+                                onChange={handleChange}
                             />
                             <Form.Control.Feedback type="invalid">Please enter  Career Goals</Form.Control.Feedback>
                         </Form.Group>
                     </div>
 
-                    <div className="col-sm-6" style={{ paddingTop: 5 }}>
+                    <div className="col-sm-6 mb-3" style={{ paddingTop: 5 }}>
                         <Form.Group controlId="exampleForm.SelectCustom">
                             <Form.Label className="text-start labelcss" style={{ display: 'flex', justifyContent: 'space-between' }}><span>Resume</span>
-                                <span style={{ color: '#FF7F50', cursor: 'pointer' }} onClick={() => handleShow()}>Replace</span></Form.Label>
+                                <span className={resume ? 'changecss' : 'disabled-span'}  onClick={() => handleShow()}>Replace</span></Form.Label>
                             <Form.Control
                                 type='text'
                                 className='textcontainer'
@@ -534,13 +597,12 @@ export default function ProfessionalExperience() {
                         </Form.Group>
                     </div>
 
-                    <div className="row pasteresume">
+                    <div className="row pasteresume mb-3">
                         <Form.Label className="text-start labelcss">Paste your Resume</Form.Label>
                         <Form.Group controlId="exampleForm.ControlTextarea1">
 
-                            <Form.Control as="textarea"
+                            <Form.Control as="textarea" onChange={handleTextAreaChange}
                                 value={pasteresume}
-                                rows={4} 
                             />
                             <Form.Control.Feedback type="invalid">Please enter terms</Form.Control.Feedback>
                         </Form.Group>
@@ -549,8 +611,12 @@ export default function ProfessionalExperience() {
 
                     <span className='d-flex ms-auto  justify-content-end pb-3'>
 
-                        <Button className='savebtn' type="submit" >Save</Button>
-                        <Button className='cancelbtn ms-2 ' onClick={() => navigate("/interview")}  >Cancel</Button>
+                        <Button className='savebtn' type="submit" disabled={formData.desired_job_role === '' &&
+                            formData.preferred_industry === '' &&
+                            formData.experience === '' &&
+                            formData.job_location === '' &&
+                            formData.career_goal === ''}>Save</Button>
+                        <Button className='cancelbtn ms-2 ' onClick={() => navigate("/interview")}>Cancel</Button>
 
                     </span>
                 </Form>
@@ -571,23 +637,25 @@ export default function ProfessionalExperience() {
                                 onDragOver={handleDragOver}
                                 className="fileUploadContainer"
                             >
-                                <Image variant="top" src={uploadicon} style={{ height: 45 }} />
+                                <div className="d-flex justify-content-end ">max-size: 50mb</div>
+                                <div className="fileUpload">
+                                    <Image variant="top" src={uploadicon} style={{ height: 45 }} />
 
-                                <p className="fileuploadtxt">Drag and drop to upload file</p>
-                                <input
-                                    type="file"
-                                    id="fileInput"
-                                    style={{ display: 'none' }}
-                                    onChange={handleImageUpload}
-                                    accept=".pdf, .docx"
-                                />
-                                <Button className='letsGo cursor' type="submit" htmlFor="fileInput">
+                                    <p className="fileuploadtxt">Drag and drop to upload file</p>
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        style={{ display: 'none' }}
+                                        onChange={handleImageUpload}
+                                        accept=".pdf, .docx"
+                                    />
+                                    <Button className='letsGo cursor' type="submit" htmlFor="fileInput">
 
-                                    <label htmlFor="fileInput" className="cursor"> Browse file
-                                    </label></Button>
-                                <p className="support">Supports: docx, pdf</p>
+                                        <label htmlFor="fileInput" className="cursor"> Browse file
+                                        </label></Button>
+                                    <p className="support">Supports: docx, pdf</p>
 
-                            </div>
+                                </div></div>
 
                         </div>
                         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}

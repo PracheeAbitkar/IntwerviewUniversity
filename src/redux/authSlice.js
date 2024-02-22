@@ -416,7 +416,7 @@ const authSlice = createSlice({
                 state.msg = msg
                 state.token = token
                 state.user = user
-
+                console.log(token,"user")
                 toast.success('Login Successful!', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 2000,
@@ -677,7 +677,7 @@ const authSlice = createSlice({
                     autoClose: 2000,
                     hideProgressBar: true,
                 });
-
+          
                 localStorage.setItem('msg', msg)
                 localStorage.setItem('token', key)
                 localStorage.setItem('isAuthenticated', state.isAuthenticated)

@@ -716,6 +716,14 @@ export default function SignUp() {
                                         </Button>
                                     </Form>
                                 </Card.Body>
+                                <p className="text-center signupBottom">By Signing up, you agree to  Interview University’s
+
+                  <span 
+                    onClick={()=> navigate('/terms')}
+                    className='logincss1 ms-1 cursor'>
+                    Terms and conditions
+                  </span>
+                </p>
                             </Card>
                         </Col>
                     </Row>
