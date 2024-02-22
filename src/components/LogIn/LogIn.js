@@ -29,9 +29,9 @@ const LogIn = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = () => {
-    return localStorage.getItem('user') !== null ? true : false
+    return localStorage.getItem('isAuthenticated') !== null ? true : false
   }
-
+console.log("authicated",isAuthenticated())
   useEffect(()=>{
     if(isAuthenticated()) navigate("/interview")
   },[])

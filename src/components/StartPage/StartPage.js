@@ -339,7 +339,7 @@ const StartPage = () => {
                 <p className="text-center signupBottom">By Signing up, you agree to  Interview University’s
 
                   <span 
-                    onClick={()=> navigate('/')}
+                    onClick={()=> navigate('/terms')}
                     className='logincss1 ms-1 cursor'>
                     Terms and conditions
                   </span>

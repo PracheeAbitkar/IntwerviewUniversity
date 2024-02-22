@@ -13,7 +13,7 @@
 
 .cardbackground {
     background: linear-gradient(0deg, #F5F5F5, #F5F5F5);
-    
+
 }
 
 .itemcss {
@@ -54,7 +54,7 @@
 
 }
 
-.navText{
+.navText {
     font-family: 'SpaceGrotesk-Medium';
 }
 
@@ -114,7 +114,7 @@
     padding-right: 35px !important;
 }
 
-.myprofile{
+.myprofile {
     background: #0073B3 !important;
     border: none;
     width: 100%;
@@ -124,8 +124,9 @@
     margin-left: 2px;
     padding: 8px !important;
     padding-left: 35px !important;
-    padding-right: 35px !important; 
+    padding-right: 35px !important;
 }
+
 .savebtn {
     background: #00A877 !important;
     border-color: #00A877 !important;
@@ -152,7 +153,7 @@
 
 .cancelbtn {
     background: rgba(174, 174, 174, 1) !important;
-    border-color: rgba(174, 174, 174, 1)!important;
+    border-color: rgba(174, 174, 174, 1) !important;
     width: 160px;
     font-family: "DMSans-Medium" !important;
     border-radius: 24px;
@@ -186,10 +187,19 @@
     justify-content: flex-start;
     cursor: pointer;
 }
+
 .disabled-span {
-    color: #999; /* Example: Change text color to gray */
-    pointer-events: none; /* Prevent pointer events, effectively disabling interactions */
-  }
+    color: #999;
+    /* Example: Change text color to gray */
+    pointer-events: none;
+    /* Prevent pointer events, effectively disabling interactions */
+}
+
+.changecss {
+    color: #FF7F50;
+    cursor: pointer;
+}
+
 .cameraimage {
 
     background-color: white;
@@ -231,20 +241,20 @@
     font-family: 'DMSans-bold';
 }
 
-.eyeiconcp{
-   
+.eyeiconcp {
+
     position: absolute;
     right: 30px;
     transition-duration: 0s;
     top: 12px;
- 
+
 }
 
 .passcss {
     padding-right: 3.5rem !important;
 }
 
-.otherGender{
+.otherGender {
     padding-top: 13px;
 }
 
@@ -264,7 +274,7 @@
         margin-bottom: 2%;
     }
 
-    .account-row{
+    .account-row {
         padding-left: 15px;
         padding-right: 15px;
     }
@@ -287,13 +297,14 @@
         margin-bottom: 2%;
     }
 
-    .account-row{
+    .account-row {
         padding-left: 15px;
         padding-right: 15px;
     }
 
-    .savebtn,.cancelbtn{
-     width: 48%;
+    .savebtn,
+    .cancelbtn {
+        width: 48%;
     }
 
 }
@@ -303,6 +314,7 @@
         display: flex;
         justify-content: center;
     }
+
     .header-profile {
         display: flex;
         flex-direction: row;
@@ -312,7 +324,7 @@
         margin-bottom: 2%;
     }
 
-    .account-row{
+    .account-row {
         padding-left: 15px;
         padding-right: 15px;
     }

@@ -34,7 +34,7 @@ import {
   pasteResume,
 } from "../../redux/authSlice";
 import { toast, ToastContainer } from "react-toastify";
-
+import Loader from './../../Loader';
 export default function InterviewPrep() {
   const dispatch = useDispatch();
   const [userrole, setUserRole] = useState("");
@@ -46,7 +46,7 @@ export default function InterviewPrep() {
   const [extractData, setextractData] = useState("");
   const [validated, setValidated] = useState(false);
   const getinitpopval = localStorage.getItem('initialquestpopup')
-
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -210,11 +210,25 @@ export default function InterviewPrep() {
       for (const value of formdata1.values()) {
         console.log(value);
       }
-
+      
       axios
         .request(config)
         .then((response) => {
-          setWelcome1(true);
+          setLoading(true)
+          dispatch(getInitiationQuestions())
+          .then((result) => {
+            setLoading(false)
+            console.log(result.payload, "favdata");
+            const data = result?.payload;
+            if (data.length > 0) {
+              setWelcome1(false);
+            } else {
+              setWelcome1(true);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
           // setSelectedImage(response.data.avatar);
         })
         .catch((error) => {
@@ -404,7 +418,23 @@ export default function InterviewPrep() {
       axios
         .request(config)
         .then((response) => {
-          setWelcome1(true);
+          setLoading(true)
+
+          dispatch(getInitiationQuestions())
+          .then((result) => {
+            setLoading(false)
+            console.log(result.payload, "favdata");
+            const data = result?.payload;
+            if (data.length > 0) {
+              setWelcome1(false);
+            } else {
+              setWelcome1(true);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          
           toast.success("Resume saved successfully", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 10000,
@@ -470,7 +500,21 @@ export default function InterviewPrep() {
             hideProgressBar: true,
           });
           setupload(false);
-          setWelcome1(true);
+          setLoading(true)
+          dispatch(getInitiationQuestions())
+          .then((result) => {
+            setLoading(false)
+            console.log(result.payload, "favdata");
+            const data = result?.payload;
+            if (data.length > 0) {
+              setWelcome1(false);
+            } else {
+              setWelcome1(true);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
           
           // setSelectedImage(response.data.avatar);
         })
@@ -521,6 +565,13 @@ export default function InterviewPrep() {
     <>
 
       <Container fluid style={{ height: '90vh', overflow: 'auto' }}>
+      {loading ? (
+                    <Loader />
+                ) : (
+                    <div>
+
+                    </div>
+                )}
         <ToastContainer />
         <Row className="smallscreen">
 
@@ -625,8 +676,10 @@ export default function InterviewPrep() {
         <Modal.Body>
           <div className="wlecomeContainer">
             <Image variant="top" className="socialImg" src={welcomeimg} />
-            <span className="welcomelable">Welcome to our app</span>
-            <span className="welcomeText mt-4"></span>
+            <span className="welcomelable">Welcome to Zunamu!</span>
+            <span className="welcomeText mt-3 p-3">To get started all we need is a copy of your resume and a job description.
+We’ll make some custom questions for you and even help generate answers if you get stuck
+based on your resume.</span>
             <span>
               <Button className="letsGo" type="submit" onClick={showUpload}>
                 Let’s Go!
@@ -793,7 +846,7 @@ export default function InterviewPrep() {
         <Modal.Body>
           <div className="wlecomeContainer">
             <Image variant="top" className="socialImg" src={welcomeimg} />
-            <span className="welcomelable">Welcome to our app</span>
+            <span className="welcomelable">Welcome to Zunamu!</span>
             <WelcomePage closeModal={handleClose1} />
           </div>
         </Modal.Body>
