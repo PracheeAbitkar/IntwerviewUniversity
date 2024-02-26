@@ -81,44 +81,8 @@ export default function SignUp() {
 
         const inputPassword = event.target.value;
         setPassword(inputPassword);
-        // const validationErrors = {};
-        // if (!isPasswordValid(inputPassword)) {
-        //     console.log("inputPassword.length",inputPassword.length)
-        //     if (!isNameValid(name)) {
-        //         validationErrors.name = "Please enter a valid user name.";
-        //     }
-        //     if (!isEmailValid(email)) {
-        //         validationErrors.email = "Please enter a valid email address.";
-        //     }
-        //     if(!/[A-Z]/.test(inputPassword)){
-        //         validationErrors.password = "Password must contain at least one uppercase letter.";
-        //     }
-        //     if(!/[@$!%*?&]/.test(inputPassword)){
-        //         validationErrors.password = "Password must contain at least one special character.";
-        //     }
-        //     if(!/[a-z]/.test(inputPassword)){
-        //         validationErrors.password = "Password must contain at least one lowercase letter.";
-        //     }
-        //     if(!/[0-9]/.test(inputPassword)){
-        //         validationErrors.password = "Password must contain at least one numeric number.";
-        //     }
-        //     if(inputPassword.length < 8){
-        //         validationErrors.password = "Password must be at least 8 characters long.";
-        //     }
-        //     if (!isConfirmPasswordValid(confirm_password)) {
-        //         validationErrors.confirm_password = "Please enter a valid password";
-        //     }
-        //     // if (!isPasswordMatches(confirm_password)) {
-        //     //     validationErrors.confirm_password_matches = "Password and Confirm does not match";
-        //     // }
-        //     if (Object.keys(validationErrors).length > 0) {
-        //         setErrors(validationErrors);
-        //         return;
-        //     }
-            
-        // }else
-        
-        if (errors.password && inputPassword.trim().length > 8 && isPasswordValid(inputPassword)) {
+
+        if (errors.password && inputPassword.trim().length > 8) {
             const updatedErrors = { ...errors };
             delete updatedErrors.password;
             setErrors(updatedErrors);
@@ -162,25 +126,80 @@ export default function SignUp() {
         if (!isEmailValid(email)) {
             validationErrors.email = "Please enter a valid email address.";
         }
-        // if(password.length < 8){
-        //     validationErrors.password = "password length should be 8 character long";
-        // }
+       
         if (!isPasswordValid(password)) {
-            if(!/[A-Z]/.test(password)){
+            if (!/[A-Z]/.test(password)) {
                 validationErrors.password = "Password must contain at least one uppercase letter.";
             }
-            if(!/[@$!%*?&]/.test(password)){
+
+            if (!/[@$!%*?&]/.test(password)) {
                 validationErrors.password = "Password must contain at least one special character.";
             }
-            if(!/[a-z]/.test(password)){
+            if (!/[a-z]/.test(password)) {
                 validationErrors.password = "Password must contain at least one lowercase letter.";
             }
-            if(!/[0-9]/.test(password)){
+            if (!/[0-9]/.test(password)) {
                 validationErrors.password = "Password must contain at least one numeric number.";
             }
-            if(password.length < 8){
-                validationErrors.password = "Password must be at least 8 characters long.";
+           
+            if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password)) {
+                validationErrors.password = "Password must contain at least one uppercase letter and one special character.";
             }
+
+            if (!/[A-Z]/.test(password) && !/[a-z]/.test(password)) {
+                validationErrors.password = "Password must contain at least one uppercase letter and one lowercase letter.";
+            }
+
+            if (!/[A-Z]/.test(password) && !/[0-9]/.test(password)) {
+                validationErrors.password = "Password must contain at least one uppercase letter and one numeric number.";
+            }
+            //////////////////
+            if (!/[@$!%*?&]/.test(password) && !/[a-z]/.test(password)) {
+                validationErrors.password = "Password must contain at least one special character and one lowercase letter.";
+            }
+
+            if (!/[@$!%*?&]/.test(password) && !/[0-9]/.test(password)) {
+                validationErrors.password = "Password must contain at least one special character and one numeric number.";
+            }
+
+            /////////////////////      
+            if (!/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+                validationErrors.password = "Password must contain at least one lowercase letter and one numeric number.";
+            }
+
+            ////////////////
+            if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password) && !/[a-z]/.test(password)) {
+                validationErrors.password = "Password must contain at least one uppercase letter and one special character and one lowercase letter.";
+            }
+
+            //////////////
+
+            if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password) && !/[0-9]/.test(password)) {
+                validationErrors.password = "Password must contain at least one uppercase letter and one special character and one numeric number.";
+            }
+
+            ///////////
+
+            if (!/[A-Z]/.test(password) && !/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+                validationErrors.password = "Password must contain at least one uppercase letter and one lowercase letter and one numeric number.";
+            }
+
+            /////////
+            if (!/[@$!%*?&]/.test(password) && !/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+                validationErrors.password = "Password must contain at least one special character and one lowercase letter and one numeric number.";
+            }
+
+            //////////
+            if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password) && !/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+                validationErrors.password = "Password must contain at least one uppercase letter and one special character and one lowercase letter and one numeric number .";
+            }
+
+
+            
+            if(password.length < 8){
+                validationErrors.password = "password length should be 8 character long";
+            }
+           
         }
 
         if (!confirm_password) {
@@ -357,7 +376,7 @@ export default function SignUp() {
                 localStorage.setItem('username', result.payload.full_name)
                 localStorage.setItem('email', result.payload.email)
                 localStorage.setItem('userId', result.payload.id)
-               
+
 
 
             })
@@ -417,7 +436,7 @@ export default function SignUp() {
                                     localStorage.setItem('username', result.payload.full_name)
                                     localStorage.setItem('email', result.payload.email)
                                     localStorage.setItem('userId', result.payload.id)
-                                   
+
                                 })
                                 .catch((errordata) => {
 
@@ -496,49 +515,10 @@ export default function SignUp() {
 
         setConfirm_password(inputPassword);
 
-        if (!inputPassword) {
-            const updatedErrors = { ...errors };
-      
-            updatedErrors.confirm_password = "Please enter Confirm Password"
-      
-            setErrors(updatedErrors);
-          }
-      
-          if (inputPassword != password) {
-            const updatedErrors = { ...errors };
-      
-            updatedErrors.confirm_password = "Create Password and Confirm Password does not match"
-      
-            setErrors(updatedErrors);
-          }
 
-        // Clear the error for password field if it becomes non-empty
-        // const validationErrors = {};
-        // if (!isConfirmPasswordValid(inputPassword)) {
-        //     console.log("test")
-        //     if (!isNameValid(name)) {
-        //         validationErrors.name = "Please enter a valid user name.";
-        //     }
-        //     if (!isEmailValid(email)) {
-        //         validationErrors.email = "Please enter a valid email address.";
-        //     }
-        //     if(inputPassword.length < 8){
-        //         validationErrors.confirm_password = "Password must be at least 8 characters long.";
-        //     }
-        //     if (!isPasswordValid(password)) {
-        //         validationErrors.password = "Please enter a valid password";
-        //     }
-        //     if (!isPasswordMatches(confirm_password)) {
-        //         validationErrors.confirm_password_matches = "Password and Confirm Password does not match";
-        //     }
-        //     if (Object.keys(validationErrors).length > 0) {
-        //         setErrors(validationErrors);
-        //         return;
-        //     }
-            
-        // }else 
-        
-        if (errors.confirm_password && inputPassword.trim().length > 8 && isConfirmPasswordValid(inputPassword)) {
+      
+
+        if (errors.confirm_password && inputPassword.trim().length > 8 ) {
             const updatedErrors = { ...errors };
             delete updatedErrors.confirm_password_matches;
             delete updatedErrors.confirm_password;
@@ -553,7 +533,7 @@ export default function SignUp() {
 
             setErrors(updatedErrors);
         }
-       
+
     };
 
     return (
@@ -592,6 +572,7 @@ export default function SignUp() {
                                             redirectURI={"https://flat-star-41744.botics.co/"}
                                             usePopup={true}
                                             callback={signInWithApple}
+                                            className='cursor'
                                             scope="email name"
                                             responseMode="query"
                                             render={renderProps => (
@@ -608,7 +589,7 @@ export default function SignUp() {
                                         />
                                         {/* <FacebookLoginButton onFacebookLogin={responseFacebook} /> */}
 
-                                        <Image src={google} alt="Image" className='socialgoogle' onClick={() => {
+                                        <Image src={google} alt="Image" className='socialgoogle cursor' onClick={() => {
                                             handleGoogleSignInAPI()
                                         }} />
                                     </div>
@@ -662,7 +643,7 @@ export default function SignUp() {
                                                     />
                                                 )}
                                             </div>
-                                            <div style={{ color: "#DD5B51", marginTop:"3px", fontSize:"14px" }}>{errors.password}</div>
+                                            <div style={{ color: "#DD5B51", marginTop: "3px", fontSize: "14px" }}>{errors.password}</div>
                                             <Form.Control.Feedback type="invalid">
                                                 {errors.password}
                                             </Form.Control.Feedback>
@@ -688,20 +669,28 @@ export default function SignUp() {
                                                     />
                                                 )}
                                             </div>
-                                            <div style={{ color: "#DD5B51", marginTop:"3px", fontSize:"14px" }}>{errors.confirm_password_matches || errors.confirm_password}</div>
+                                            <div style={{ color: "#DD5B51", marginTop: "3px", fontSize: "14px" }}>{errors.confirm_password_matches || errors.confirm_password}</div>
                                             <Form.Control.Feedback type="invalid">
                                                 {errors.confirm_password_matches || errors.confirm_password}
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                         <Form.Group className='formgr' controlId="formBasicCheckbox">
-                                            <Form.Check
-                                                type="checkbox"
-                                                label="I have read the Terms and Conditions and Privacy Policy"
-                                                checked={tnc}
-                                                onChange={handleTermsNConditionsChange}
-                                                isInvalid={!!errors.tnc}
-                                                className='labelcss1'
-                                            />
+                                            <Form.Check type="checkbox">
+                                                <Form.Check.Input type="checkbox" onChange={handleTermsNConditionsChange}
+                                                    isInvalid={!!errors.tnc}
+                                                    checked={tnc}
+                                                />
+
+
+                                                <Form.Check.Label className='labelcss'>
+                                                    I have read the  <a
+                                                        onClick={() => navigate('/terms')}
+                                                        className='labelcss ms-1 cursor'>Terms and Conditions </a>and
+                                                    <a
+                                                        onClick={() => navigate('/privacy')}
+                                                        className='labelcss ms-1 cursor'>Privacy Policy</a>
+                                                </Form.Check.Label>
+                                            </Form.Check>
 
                                             <div style={{ color: "rgb(220,53,69)", fontSize: "15px" }}>{errors.tnc}</div>
                                             <Form.Control.Feedback type="invalid">
@@ -718,12 +707,12 @@ export default function SignUp() {
                                 </Card.Body>
                                 <p className="text-center signupBottom">By Signing up, you agree to  Interview University’s
 
-                  <span 
-                    onClick={()=> navigate('/terms')}
-                    className='logincss1 ms-1 cursor'>
-                    Terms and conditions
-                  </span>
-                </p>
+                                    <span
+                                        onClick={() => navigate('/terms')}
+                                        className='logincss1 ms-1 cursor'>
+                                        Terms and conditions
+                                    </span>
+                                </p>
                             </Card>
                         </Col>
                     </Row>

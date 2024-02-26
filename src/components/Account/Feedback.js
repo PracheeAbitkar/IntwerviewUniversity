@@ -57,11 +57,11 @@ const Feedback = () => {
     };
     const body = {
         email: email,
-        message: message
+        feedback: message
     }
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        ;
+        
 
         // Perform validation
 
@@ -83,7 +83,7 @@ const Feedback = () => {
         if (Object.keys(validationErrors).length === 0) {
             dispatch(feedbackuser(body))
                 .then((result) => {
-                    toast.success("Feedback send successfully", {
+                    toast.success("Feedback email sent successfully.", {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: 5000,
                         hideProgressBar: true,
@@ -106,12 +106,12 @@ const Feedback = () => {
                     <Col lg={4} className='d-none d-lg-block'>
                         <Sidebar />
                     </Col> */}
-            <Col xl={12} className='d-lg-none d-xl-none d-xl-block d-lg-block  d-flex justify-content-center'><Button className='myprofile' >Support/ Send Feedback</Button></Col>
+            <Col xl={12} className='d-lg-none d-xl-none d-xl-block d-lg-block  d-flex justify-content-center mx-4 mb-3'><Button className='myprofile' >Support/ Send Feedback</Button></Col>
             {/* <Col lg={8} className='mt-5'> */}
 
             <ToastContainer />
 
-            <div className="mb-5">
+            <div className="mb-5 mx-4">
                 <Row>
                     <Col lg={8}>
                         <Form onSubmit={handleFormSubmit} style={{ height: "420px" }}>

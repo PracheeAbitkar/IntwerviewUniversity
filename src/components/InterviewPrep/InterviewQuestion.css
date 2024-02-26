@@ -19,6 +19,21 @@
     flex-direction: row;
     align-items: center;
 }
+
+.regen1{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.regen2{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}
+
 .questionBottom {
     display: flex;
     flex-direction: row;
@@ -175,8 +190,8 @@
     
     }
     .questionsave {
-        background: rgba(174, 174, 174, 1) !important;
-        border-color: rgba(174, 174, 174, 1) !important;
+        /* background: rgba(174, 174, 174, 1) !important;
+        border-color: rgba(174, 174, 174, 1) !important; */
         font-family: "DMSans-Medium" !important;
         border-radius: 24px;
         padding: 2px !important;

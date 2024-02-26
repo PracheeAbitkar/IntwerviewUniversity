@@ -92,6 +92,8 @@
 .required {
   color: red;
 }
+
+
 @media (max-width: 767px) {
 
   .image-col,

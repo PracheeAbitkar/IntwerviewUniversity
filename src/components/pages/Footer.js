@@ -17,7 +17,7 @@ const Footer = () => {
         <Col xl={6} className='footerContainer'>
           <span className='me-3 footertext cursor' onClick={() => navigate('/home')}>Home</span>
           <span className='me-3 footertext cursor' onClick={() => navigate('/about')}>About</span>
-          <span className='footertext cursor' onClick={() => navigate("/contact")}>Contact</span>
+          <span className='footertext cursor' onClick={() => navigate('/contact')}>Contact</span>
         </Col>
 
         <Col className='social' xl={6}>
@@ -38,8 +38,8 @@ const Footer = () => {
             <Image variant="top" className='footerimg' src={footerlogo} />
           </Col>
           <Col className='footertxt2' xs={12} lg={4} md={4}>
-            <span className='me-2 cursor' onClick={() => navigate("/terms")}>Terms of Service</span>
-            <span className='cursor' onClick={() => navigate("/privacy")}>Privacy Policy</span>
+            <span className='me-2 cursor' onClick={() => navigate('/terms')}>Terms of Service</span>
+            <span className='cursor' onClick={() => navigate('/privacy')}>Privacy Policy</span>
           </Col>
         </Row>
       </span>

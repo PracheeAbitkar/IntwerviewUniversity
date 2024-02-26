@@ -358,8 +358,9 @@ export default function ProfessionalExperience() {
                     <Col lg={4} className="d-none d-lg-block">
                         <Sidebar />
                     </Col> */}
-            <Col xl={12} className='d-lg-none d-xl-none d-xl-block d-lg-block  d-flex justify-content-center'><Button className='myprofile' >Professional Experience</Button></Col>
+            <Col xl={12} sm={10} className='d-lg-none d-xl-none d-xl-block d-lg-block  d-flex justify-content-center px-4 py-2 mb-3'><Button className='myprofile' >Professional Experience</Button></Col>
             {/* <Col lg={8} className="mt-3 "> */}
+            <div className="px-4">
             {proExperience.length > 0 ? <>
                 {proExperience?.map((item) => (
                     <Form className="me-lg-5" onSubmit={handleFormSubmit}>
@@ -621,6 +622,8 @@ export default function ProfessionalExperience() {
                     </span>
                 </Form>
             }
+
+</div>
 
             <Modal show={upload} onHide={uploadClose}
                 aria-labelledby="contained-modal-title-vcenter"
