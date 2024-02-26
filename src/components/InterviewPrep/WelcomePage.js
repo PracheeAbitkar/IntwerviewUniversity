@@ -73,11 +73,11 @@ export default function WelcomePage({ closeModal }) {
     let isValid = true;
 
     const linkedinRegex = /(https?)?:?(\/\/)?(([w]{3}||\w\w)\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    const onlyAlphabet = /^[a-zA-Z]+$/;
+    const onlyAlphabet = /^[a-zA-Z\s]*$/;
     const onlyNumber = /^[0-9]{10}$/;
     const url = formData.linkedin;
     const fullName = formData.full_name;
-    const phoneNumber = formData.phone_number
+    // const phoneNumber = formData.phone_number
 
 
 
@@ -90,14 +90,14 @@ export default function WelcomePage({ closeModal }) {
       isValid = false;
     }
 
-    if (!formData.phone_number.trim()) {
-      setErrors({ ...errors, phoneNumberError: 'Phone Number is required' });
-      isValid = false;
-    }
-    else if (!onlyNumber.test(phoneNumber)) {
-      setErrors({ ...errors, phoneNumberError: 'Number format is wrong' });
-      isValid = false;
-    }
+    // if (!formData.phone_number.trim()) {
+    //   setErrors({ ...errors, phoneNumberError: 'Phone Number is required' });
+    //   isValid = false;
+    // }
+    // else if (!onlyNumber.test(phoneNumber)) {
+    //   setErrors({ ...errors, phoneNumberError: 'Number format is wrong' });
+    //   isValid = false;
+    // }
     if (!formData.full_name.trim()) {
       setErrors({ ...errors, fullNameError: 'Full Name is required' });
       isValid = false;
@@ -187,9 +187,9 @@ export default function WelcomePage({ closeModal }) {
     if (name === 'full_name' && errors.fullNameError) {
       setErrors({ ...errors, fullNameError: '' });
     }
-    if (name === 'phone_number' && errors.phoneNumberError) {
-      setErrors({ ...errors, phoneNumberError: '' });
-    }
+    // if (name === 'phone_number' && errors.phoneNumberError) {
+    //   setErrors({ ...errors, phoneNumberError: '' });
+    // }
     if (name === 'linkedin' && errors.linkedinError) {
       setErrors({ ...errors, linkedinError: '' });
     }
@@ -340,7 +340,7 @@ export default function WelcomePage({ closeModal }) {
                   </Form.Group>
                 </div>
               </div>
-              <div className="row mb-2 account-row">
+              {/* <div className="row mb-2 account-row">
 
                 <div className="col-sm" style={{ paddingTop: 5 }}>
                   <Form.Group controlId="exampleForm.SelectCustom">
@@ -358,7 +358,7 @@ export default function WelcomePage({ closeModal }) {
 
                   </Form.Group>
                 </div>
-              </div>
+              </div> */}
 
               <div className="row mb-2 account-row">
                 <div className="col-sm" style={{ paddingTop: 5 }}>

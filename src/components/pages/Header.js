@@ -13,7 +13,7 @@ import './Header.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserProfile } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
-
+import axios from "axios";
 export default function Header() {
   // const userName = localStorage.getItem('username')
   const userEmail = localStorage.getItem('email')
@@ -22,7 +22,7 @@ export default function Header() {
   const [show, setShow] = useState(false);
   const [isloggedIn, setIsloggedIn] = useState(false);
   const dispatch = useDispatch();
-  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const isAuthenticated = sessionStorage.getItem('isAuthenticated') ||localStorage.getItem('isAuthenticated');
   const photo = localStorage.getItem('photo');
 
   const [count, setCount] = useState(0);
@@ -164,25 +164,62 @@ export default function Header() {
     setshowLogout(false)
     //dispatch(logout())
     localStorage.removeItem('token')
+    sessionStorage.removeItem("isAuthenticated");
     localStorage.removeItem('username')
     localStorage.removeItem('role')
     localStorage.removeItem('userId')
     localStorage.removeItem('isAuthenticated')
     localStorage.setItem('isAuthenticated', false)
+    sessionStorage.setItem("isAuthenticated", false);
     localStorage.clear();
+    sessionStorage.clear();
     // console.log(isAuthenticated,"isAuthenticated")
     // if (!isAuthenticated) 
     navigate('/')
 
 
   }
+
+  const deleteAccount = () => {
+    let config = {
+        method: 'DELETE',
+        url: 'https://round-unit-43333.botics.co/deleteuser',
+        headers: {
+            'X-CSRFTOKEN': `rN3gD7X9fMWNBXec7Y4naOPY4jvc8yvzOAZvMblW4pChKVH0pKZegdontyYtuN1c`,
+            'Authorization': `token ${localStorage.getItem('token')}`
+        }
+    };
+    setdeleteacc(false)
+    axios.request(config)
+        .then((response) => {
+          
+            localStorage.removeItem('token')
+            localStorage.removeItem('username')
+            localStorage.removeItem('role')
+            localStorage.removeItem('userId')
+            localStorage.removeItem('isAuthenticated')
+            localStorage.setItem('isAuthenticated', false)
+            sessionStorage.setItem('isAuthenticated', false)
+            sessionStorage.removeItem("isAuthenticated");
+          
+            sessionStorage.clear();
+            localStorage.clear();
+            navigate('/')
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
   return (
     <div>
       <Navbar expand="xl" className='headercss px-3 px-sm-4 px-md-5 px-lg-5 px-xl-5'>
 
         {isAuthenticated ? (
           < >
-            <Navbar.Brand href="/">
+            <Navbar.Brand  className='d-lg-none d-block'>
+              <Image variant="top" className='img' src={mainlogo} onClick={() => navigate('/interview')}/>
+            </Navbar.Brand>
+            <Navbar.Brand  className='d-lg-block d-none'>
               <Image variant="top" className='img' src={mainlogo} />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setMenuDisplay(!menuDisplay)} />
@@ -207,7 +244,7 @@ export default function Header() {
           <>
             {/* fluid className="mainContainer mx-5 px-5" */}
 
-            <Navbar.Brand href="/">
+            <Navbar.Brand >
               <Image variant="top" className='img' src={mainlogo} />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setMenuDisplay(!menuDisplay)} />
@@ -333,7 +370,7 @@ export default function Header() {
               <span className="logoutlabel">Are you sure you want to delete the account?
               </span>
               <span>
-                <Button className='savebtn' type="submit me-3"  >Yes</Button>
+                <Button className='savebtn' type="submit me-3"  onClick={deleteAccount}>Yes</Button>
                 <Button className='savebtn' type="submit"  >No</Button>
               </span>
             </div>

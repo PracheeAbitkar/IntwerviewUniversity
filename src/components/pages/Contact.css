@@ -1,0 +1,23 @@
+.contact-us-fields{
+    border: none !important;
+    border-bottom: 1px solid black !important;
+    border-radius: 0 !important;
+    margin: 15px 0 !important;
+}
+
+
+.contactcancelbtn {
+    background: rgba(174, 174, 174, 1) !important;
+    border-color: rgba(174, 174, 174, 1) !important;
+    width: 100%;
+    font-family: "Roboto-bold";
+    border: none;
+}
+
+.contactbtncss {
+    background: #FF7F50 !important;
+    border: none;
+    border-color: #FF7F50 !important;
+    width: 100%;
+    font-family: "Roboto-bold";
+}

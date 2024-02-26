@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom';
 import regen from '../../assets/images/regen.svg'
 import back from '../../assets/images/back.png'
+import close from '../../assets/images/close.svg'
+
 import Loader from './../../Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -22,7 +24,10 @@ export default function InterviewQuestion() {
 
     const dispatch = useDispatch()
     const [questionInterview, setQuestionInterview] = useState(false)
+    const [seeQuestion, setseeQuestion] = useState(false)
+    
     const questionCLose = () => setQuestionInterview(false)
+    const allQuestionCLose =() => setseeQuestion(false)
     const [loading, setLoading] = useState(false);
     const [typeanswer, settypeanswer] = useState(true);
     const [showans, setshowans] = useState(false);
@@ -39,19 +44,19 @@ export default function InterviewQuestion() {
         role: '',
         question_1: '',
         answer_1: '',
-        favourite_1:'False',
+        favourite_1: false,
         question_2: '',
         answer_2: '',
-        favourite_2:'False',
+        favourite_2: false,
         question_3: '',
         answer_3: '',
-        favourite_3:'False',
+        favourite_3: false,
         question_4: '',
         answer_4: '',
-        favourite_4:'False',
+        favourite_4: false,
         question_5: '',
         answer_5: '',
-        favourite_5:'False',
+        favourite_5: false,
 
     });
 
@@ -70,6 +75,7 @@ export default function InterviewQuestion() {
                 userdata
             ]
         }
+        setIsClicked(false)
 
         dispatch(getQuestion(body))
             .then((result) => {
@@ -100,28 +106,36 @@ export default function InterviewQuestion() {
 
     const handleItemClick = (item, index) => {
         // setLoading(true)
-       
+
         // console.log(index, "ques")
 
         // enablebtn
-
+        setseeQuestion(false)
         if (answers.hasOwnProperty(`answer_${index}`)) {
-           // console.log(answers, "answers")
+            console.log(answers, "answers")
             const ques = `answer_${index}`
+            const fav = `favourite_${index}`
             // console.log(ques, "ques")
             // console.log(answers[ques], "answers.ques")
 
             settypeanswer(true)
             setInputAnswerData(answers[ques])
-            console.log(answers.ques,"answers.ques")
-            if (answers[ques] !='') {
+            console.log(answers[fav], "answers.ques")
+            if (answers[ques] != '') {
+                if(answers[fav] === true){
+                    setIsClicked(true)
+                }else if(answers[fav] === false){
+                    setIsClicked(false)
+                }
+               
                 setEnablebtn(true)
             } else {
+                setIsClicked(false)
                 setEnablebtn(false)
             }
 
         } else {
-           
+
             // "answer_1" is not available in the object
             setanswerData('')
             setEnablebtn(false)
@@ -129,7 +143,7 @@ export default function InterviewQuestion() {
         }
 
         setSelectedItem(item);
-        setIsClicked(false);
+        //  setIsClicked(false);
 
         settypeanswer(true)
         setshowans(false)
@@ -151,7 +165,25 @@ export default function InterviewQuestion() {
                 userdata
             ]
         }
-        setAnswers([])
+        setAnswers({
+            role: '',
+            question_1: '',
+            answer_1: '',
+            favourite_1: false,
+            question_2: '',
+            answer_2: '',
+            favourite_2: false,
+            question_3: '',
+            answer_3: '',
+            favourite_3: false,
+            question_4: '',
+            answer_4: '',
+            favourite_4: false,
+            question_5: '',
+            answer_5: '',
+            favourite_5: false,
+
+        })
         setanswerData('')
         setInputAnswerData('')
         dispatch(getQuestion(body))
@@ -233,9 +265,9 @@ export default function InterviewQuestion() {
             const num = selectedItem.split('.')[0];
             setAnswers(prevAnswers => ({
                 ...prevAnswers,
-                [`favourite_${num}`]: "True"
+                [`favourite_${num}`]: true
             }));
-            
+
             const body1 = {
                 "answer": answerData.length === 0 ? inputAnswerData : answerData.join(''),
                 "question": selectedItem,
@@ -351,6 +383,10 @@ export default function InterviewQuestion() {
     const toggleTab = () => {
         setIsOpen(!isOpen);
     };
+
+    const seeAllQUestion =()=>{
+        setseeQuestion(true)
+    }
     return (
         <div>
             <ToastContainer />
@@ -370,7 +406,7 @@ export default function InterviewQuestion() {
                 </Row>
                 <Row className='d-lg-none seequestion'>
                     <Col>
-                        <button type="button" className="btn btn-outline-primary ms-2 mb-2">See All Questions</button>
+                        <button type="button" className="btn btn-outline-primary ms-2 mb-2" onClick={seeAllQUestion}>See All Questions</button>
                     </Col>
                 </Row>
                 <Row>
@@ -381,7 +417,7 @@ export default function InterviewQuestion() {
                             <div className='row ms-1 mt-3'>
                                 {/* <div className='col-sm d-flex justify-content-center cursor'><Image onClick={() => regenerateQ()} src={regenerate} style={{ height: 27 }} /></div> */}
                                 <div className='col-sm regen cursor'>
-                                    {!isOpen && <> <Image onClick={() => regenerateQ()} src={regen}  />
+                                    {!isOpen && <> <Image onClick={() => regenerateQ()} src={regen} />
                                         <span className='retxt'>Regenerate Questions</span> </>}
                                 </div>
                                 <div className='col-sm d-flex justify-content-end me-2'>
@@ -442,7 +478,7 @@ export default function InterviewQuestion() {
                                                 {selectedItem}
                                             </Form.Label>
                                             <span className='answer'>Answer:</span>
-                                            <p style={{ height: '80vh', overflow: 'auto' }}>
+                                            <p style={{ height: '70vh', overflow: 'auto' }}>
                                                 {/* <Form.Control as="textarea" required style={{ minHeight: '90vh',overflow:'auto' }}
                                                 value={answerData} onChange={(e) => setInputAnswerData(e.target.value)}
                                                 /> */}
@@ -453,12 +489,12 @@ export default function InterviewQuestion() {
                                 </div>
                             </div>}
                             <div className='questionBottom mb-2'>
-                                <span className='liketext cursor d-none d-lg-block' style={textStyle} onClick={() => favanswer()} >
+                                <span className='liketext cursor d-block d-lg-block' style={textStyle} onClick={() => favanswer()} >
                                     {isClicked ? <FontAwesomeIcon icon={faHeart} style={{ color: 'red', paddingRight: 5 }} />
                                         :
                                         <Image src={like} className='arrowimg' style={textStyle} />}
                                     Favorite this answer</span>
-                                <span className='liketext cursor d-lg-none'><Image src={like} className='arrowimg' />Save this answer</span>
+                              
                                 <span >
                                     <Button className='questionsave'
                                         style={{
@@ -491,6 +527,51 @@ export default function InterviewQuestion() {
                         <span className="d-flex ms-xs-3 justify-content-end ms-auto">
                             <Button className='savebtn' type="submit" onClick={questionCLose} >Close</Button>
                         </span>
+                    </Modal.Body>
+
+                </Modal>
+
+                <Modal show={seeQuestion} onHide={allQuestionCLose}
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered className="newInterview interviewQuestion"
+                >
+                    <Modal.Body className="newModal p-2">
+                        <Row>
+                            <Col  >
+
+                                <Card className="flex-column cardbackground1 ms-2 me-2 mt-2 mb-2" style={{ height: '120vh', overflow: 'auto' }} >
+
+                                    <div className='row ms-1 mt-3'>
+                                        {/* <div className='col-sm d-flex justify-content-center cursor'><Image onClick={() => regenerateQ()} src={regenerate} style={{ height: 27 }} /></div> */}
+                                        <div className='col-sm regen1 cursor'>
+                                        <div> <Image onClick={() => regenerateQ()} src={regen} />
+                                                <span className='retxt'>Regenerate Questions</span> </div>
+                                                <Image className={`cursor`} onClick={allQuestionCLose} src={close} style={{ height: 30 }} />
+                                        </div>
+                                        {/* <div className='col-sm d-flex justify-content-end me-2'>
+                                            <Image className={`cursor`} onClick={allQuestionCLose} src={back} style={{ height: 30 }} />
+                                        </div> */}
+                                    </div>
+
+                                    
+                                        <Nav className="flex-column mb-2">
+
+                                            {questionData?.filter((item) => item != '')?.map((item, i) => (
+
+                                                <Nav.Item key={item}
+                                                    className={`${selectedItem === item ? 'sideActive' : 'sideInactive'} pb-2`}
+                                                    onClick={() => handleItemClick(item, i + 1)}>
+                                                    <Nav.Link href="#section1" className={`profiletext ${selectedItem === item ? 'activetext1' : 'notactive1'}`} >{item}</Nav.Link>
+                                                </Nav.Item>
+
+                                            ))}
+                                        </Nav>
+                                    
+                                </Card>
+
+
+                            </Col>
+                        </Row>
                     </Modal.Body>
 
                 </Modal>

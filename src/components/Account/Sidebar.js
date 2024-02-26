@@ -25,7 +25,7 @@ export default function Sidebar() {
     const handleClose2 = () => setdeleteacc(false);
 
     const [selectedItem, setSelectedItem] = useState(1);
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    const isAuthenticated = sessionStorage.getItem('isAuthenticated') || localStorage.getItem('isAuthenticated');
     useEffect(() => {
 
     }, [isAuthenticated])
@@ -83,8 +83,11 @@ export default function Sidebar() {
         localStorage.removeItem('role')
         localStorage.removeItem('userId')
         localStorage.removeItem('isAuthenticated')
+       sessionStorage.removeItem("isAuthenticated");
+        sessionStorage.setItem("isAuthenticated", false);
         localStorage.setItem('isAuthenticated', false)
         localStorage.clear();
+        sessionStorage.clear();
         // console.log(isAuthenticated,"isAuthenticated")
         // if (!isAuthenticated) 
         navigate('/')
@@ -110,6 +113,10 @@ export default function Sidebar() {
                 localStorage.removeItem('userId')
                 localStorage.removeItem('isAuthenticated')
                 localStorage.setItem('isAuthenticated', false)
+                sessionStorage.setItem('isAuthenticated', false)
+                sessionStorage.removeItem("isAuthenticated");
+              
+                sessionStorage.clear();
                 localStorage.clear();
                 navigate('/')
             })

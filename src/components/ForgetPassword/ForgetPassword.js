@@ -19,7 +19,7 @@ const ForgetPassword = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
     const response = useSelector((state) => state);
-    ;
+    
 
     useEffect(() => {
         if (response.user.msg === "password reset link send. Please check your email response from forget") {
@@ -78,9 +78,9 @@ const ForgetPassword = () => {
 
     const backgroundImageStyle = {
         position: 'absolute',
-        top: 82,
+        top: 110,
         right: 0,
-        bottom: 0,
+        bottom: 240,
         left: 155,
         backgroundImage: `url(${ellipse})`,
         backgroundRepeat: 'no-repeat',
@@ -90,13 +90,13 @@ const ForgetPassword = () => {
         position: 'absolute',
         top: 300,
         right: 0,
-        bottom: 0,
+        bottom: 250,
         left: 986,
         backgroundImage: `url(${blue})`,
         backgroundRepeat: 'no-repeat',
     };
     return (
-        <Container fluid className="d-flex justify-content-center align-items-center py-5 login">
+        <Container fluid className="d-flex justify-content-center align-items-center py-5 login" >
             <div style={{ width: '10px', height: '10px' }}>
                 <div style={backgroundImageStyle}></div></div>
             <div style={{ width: '10px', height: '10px' }}>
@@ -107,7 +107,6 @@ const ForgetPassword = () => {
                         <Card className="flex-fill no-margin loginImage box-shadow">
                             <Card.Body>
                                 <div className='logocss loginmargin1'>
-                                    {/* <Image variant="top" className="img-fluid" src={logo} /> */}
                                 </div>
                                 <div className='logocss d-none d-lg-block'>
                                     <Image variant="top" className="img-fluid custom-img" src={loginside} />
@@ -118,7 +117,7 @@ const ForgetPassword = () => {
                     <Col className="d-flex" xl={6}>
                         <Card className="flex-fill no-margin box-shadow">
                             <Card.Body className="margintop">
-                                <div className="text-center p-2  " >
+                                <div className="text-center p-2" >
                                     <Card.Title className='logintitle'>Forgot Password</Card.Title>
                                 </div>
                                 <ToastContainer />

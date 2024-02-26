@@ -84,28 +84,103 @@ const ResetPass = () => {
 
     if (errors.confirm_password && inputPassword.trim().length > 8) {
       const updatedErrors = { ...errors };
-
+      delete updatedErrors.confirm_password_matches;
       delete updatedErrors.confirm_password;
 
       setErrors(updatedErrors);
     }
     if (errors.confirm_password_matches && inputPassword === password) {
       const updatedErrors = { ...errors };
-
       delete updatedErrors.confirm_password_matches;
+      delete updatedErrors.confirm_password;
 
       setErrors(updatedErrors);
     }
+
+    
   };
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(resetPassword(body))
-
+  
     const validationErrors = {};
-    if (!isPasswordValid(password)) {
-      validationErrors.password = "Please enter a valid password";
-    }
+    // if (!isPasswordValid(password)) {
+    //   validationErrors.password = "Please enter a valid password";
+    // }
 
+    if (!isPasswordValid(password)) {
+      if (!/[A-Z]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter.";
+      }
+
+      if (!/[@$!%*?&]/.test(password)) {
+          validationErrors.password = "Password must contain at least one special character.";
+      }
+      if (!/[a-z]/.test(password)) {
+          validationErrors.password = "Password must contain at least one lowercase letter.";
+      }
+      if (!/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one numeric number.";
+      }
+     
+      if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter and one special character.";
+      }
+
+      if (!/[A-Z]/.test(password) && !/[a-z]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter and one lowercase letter.";
+      }
+
+      if (!/[A-Z]/.test(password) && !/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter and one numeric number.";
+      }
+      //////////////////
+      if (!/[@$!%*?&]/.test(password) && !/[a-z]/.test(password)) {
+          validationErrors.password = "Password must contain at least one special character and one lowercase letter.";
+      }
+
+      if (!/[@$!%*?&]/.test(password) && !/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one special character and one numeric number.";
+      }
+
+      /////////////////////      
+      if (!/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one lowercase letter and one numeric number.";
+      }
+
+      ////////////////
+      if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password) && !/[a-z]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter and one special character and one lowercase letter.";
+      }
+
+      //////////////
+
+      if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password) && !/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter and one special character and one numeric number.";
+      }
+
+      ///////////
+
+      if (!/[A-Z]/.test(password) && !/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter and one lowercase letter and one numeric number.";
+      }
+
+      /////////
+      if (!/[@$!%*?&]/.test(password) && !/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one special character and one lowercase letter and one numeric number.";
+      }
+
+      //////////
+      if (!/[A-Z]/.test(password) && !/[@$!%*?&]/.test(password) && !/[a-z]/.test(password) && !/[0-9]/.test(password)) {
+          validationErrors.password = "Password must contain at least one uppercase letter and one special character and one lowercase letter and one numeric number .";
+      }
+
+
+      
+      if(password.length < 8){
+          validationErrors.password = "password length should be 8 character long";
+      }
+     
+  }
     if (!isConfirmPasswordValid(rePassword)) {
       validationErrors.confirm_password = "Please enter a valid re password";
     }
@@ -115,6 +190,8 @@ const ResetPass = () => {
     if (Object.keys(validationErrors).length === 0) {
       setPassword("")
       setRePassword("")
+      dispatch(resetPassword(body))
+
     }
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -125,8 +202,9 @@ const ResetPass = () => {
   }
   const isPasswordValid = (inputPassword) => {
     // Implement your own password validation logic
-
-    return inputPassword.trim().length > 8;
+    const regex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}/;
+    return regex.test(inputPassword);
+    // return inputPassword.trim().length > 8;
   };
   const isConfirmPasswordValid = (inputPassword) => {
     // Implement your own password validation logic
@@ -202,10 +280,11 @@ const ResetPass = () => {
                               onClick={handleTogglePasswordVisibilityPassword}
                             />
                           )}
-                        </div>
-                        <Form.Control.Feedback type="invalid">
+                           <Form.Control.Feedback type="invalid">
                           {errors.password}
                         </Form.Control.Feedback>
+                        </div>
+                       
                       </Form.Group>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label className="text-start labelcss">Enter Re-Password<span class="required">*</span></Form.Label>
@@ -224,10 +303,11 @@ const ResetPass = () => {
                               onClick={handleTogglePasswordVisibility}
                             />
                           )}
-                        </div>
-                        <Form.Control.Feedback type="invalid">
+                           <Form.Control.Feedback type="invalid">
                           {errors.confirm_password_matches || errors.confirm_password}
                         </Form.Control.Feedback>
+                        </div>
+                       
                       </Form.Group>
 
                       <Button

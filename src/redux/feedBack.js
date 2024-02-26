@@ -14,8 +14,22 @@ const initialState={
     detail:""
 
 }
+
 export const feedbackuser=createAsyncThunk('feedbackuser',async(body)=>{
-    const res =await fetch("https://round-unit-43333.botics.co/support_feedback/sendfeedback",{
+    const res =await fetch("https://round-unit-43333.botics.co/support/submit_feedback/",{
+        method:"post",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': `token ${localStorage.getItem('token')}`
+        },
+        body:JSON.stringify(body)
+    })
+    return await res.json();
+})
+
+
+export const contactus=createAsyncThunk('contactus',async(body)=>{
+    const res =await fetch("https://round-unit-43333.botics.co/contact/contact_us_email/",{
         method:"post",
         headers:{
             'Content-Type': 'application/json',
@@ -25,6 +39,7 @@ export const feedbackuser=createAsyncThunk('feedbackuser',async(body)=>{
     })
     return await res.json();
 })
+
 
 const feedBack = createSlice({
     name:"feedbackUser",

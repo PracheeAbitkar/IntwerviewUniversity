@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {  useEffect } from 'react'
 
 
 export default function Terms() {
-
-
+ 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
   return (
     <div style={{
     display: 'flex',
@@ -13,6 +15,7 @@ export default function Terms() {
     }} className='p-5'>
 
       <h3>Terms and Conditions for Zunamu.com</h3>
+      <br></br>
       <h6>Welcome to Zunamu.com!</h6>
       <p>
        

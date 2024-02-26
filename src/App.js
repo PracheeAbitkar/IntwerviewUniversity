@@ -21,15 +21,16 @@ import React, { useState } from 'react'
 import Faq from './components/pages/Faq';
 import Contact from './components/pages/Contact';
 import Terms from './components/pages/Terms';
+import Privacy from './components/pages/Privacy';
 
 function App() {
   const [profilePhoto, setProfilePhoto] = useState(null);
 
   const isAuthenticated = () => {
-    return localStorage.getItem('isAuthenticated') !== null ? true : false
+    return sessionStorage.getItem('isAuthenticated') || localStorage.getItem('isAuthenticated') !== null ? true : false
   }
 
-  console.log("check here --->", isAuthenticated())
+ 
 
   const PrivateRoute = ({ element }) => {
     return isAuthenticated() ? (
@@ -63,7 +64,7 @@ function App() {
           <Route exact path='/contact' element={<Contact />} />
           <Route exact path='/faq' element={<Faq />} />
           <Route exact path='/terms' element={<Terms />} />
-          <Route exact path='/privacy' element={<Faq />} />
+          <Route exact path='/privacy' element={<Privacy />} />
 
 
 

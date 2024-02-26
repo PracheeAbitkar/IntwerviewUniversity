@@ -380,8 +380,11 @@ const authSlice = createSlice({
             localStorage.removeItem('username')
             localStorage.removeItem('role')
             localStorage.removeItem('userId')
+            sessionStorage.removeItem("isAuthenticated");
             localStorage.removeItem('isAuthenticated')
+            sessionStorage.setItem("isAuthenticated", false);
             localStorage.clear();
+            sessionStorage.clear();
             state.isAuthenticated = false;
 
             //     if (typeof window.FB !== 'undefined') {
@@ -416,7 +419,7 @@ const authSlice = createSlice({
                 state.msg = msg
                 state.token = token
                 state.user = user
-                console.log(token,"user")
+                console.log(user,"user")
                 toast.success('Login Successful!', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 2000,
@@ -425,7 +428,7 @@ const authSlice = createSlice({
 
                 localStorage.setItem('msg', msg)
                 localStorage.setItem('token', key)
-                localStorage.setItem('isAuthenticated', state.isAuthenticated)
+                // localStorage.setItem('isAuthenticated', state.isAuthenticated)
                 localStorage.setItem('user', JSON.stringify(user))
             } else {
                 state.error = error

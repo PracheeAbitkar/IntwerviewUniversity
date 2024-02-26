@@ -59,7 +59,7 @@ export default function InterviewPrep() {
   const [isActive, setisActive] = useState("saved");
   const [showdiv, setShowdiv] = useState(true);
   const [showPasteDiv, setshowPasteDiv] = useState(false);
-
+console.log(localStorage.getItem('remember'),"remember")
   const handleClose = () => {
     setWelcome(false);
     localStorage.setItem('initialquestpopup', false)
@@ -214,21 +214,22 @@ export default function InterviewPrep() {
       axios
         .request(config)
         .then((response) => {
-          setLoading(true)
-          dispatch(getInitiationQuestions())
-          .then((result) => {
-            setLoading(false)
-            console.log(result.payload, "favdata");
-            const data = result?.payload;
-            if (data.length > 0) {
-              setWelcome1(false);
-            } else {
-              setWelcome1(true);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          localStorage.setItem('initialquestpopup', false)
+          // setLoading(true)
+          // dispatch(getInitiationQuestions())
+          // .then((result) => {
+          //   setLoading(false)
+          //   console.log(result.payload, "favdata");
+          //   const data = result?.payload;
+          //   if (data.length > 0) {
+          //     setWelcome1(false);
+          //   } else {
+          //     setWelcome1(true);
+          //   }
+          // })
+          // .catch((error) => {
+          //   console.log(error);
+          // });
           // setSelectedImage(response.data.avatar);
         })
         .catch((error) => {
@@ -418,26 +419,27 @@ export default function InterviewPrep() {
       axios
         .request(config)
         .then((response) => {
-          setLoading(true)
+          localStorage.setItem('initialquestpopup', false)
+         // setLoading(true)
 
-          dispatch(getInitiationQuestions())
-          .then((result) => {
-            setLoading(false)
-            console.log(result.payload, "favdata");
-            const data = result?.payload;
-            if (data.length > 0) {
-              setWelcome1(false);
-            } else {
-              setWelcome1(true);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          // dispatch(getInitiationQuestions())
+          // .then((result) => {
+          //   setLoading(false)
+          //   console.log(result.payload, "favdata");
+          //   const data = result?.payload;
+          //   if (data.length > 0) {
+          //     setWelcome1(false);
+          //   } else {
+          //     setWelcome1(true);
+          //   }
+          // })
+          // .catch((error) => {
+          //   console.log(error);
+          // });
           
           toast.success("Resume saved successfully", {
             position: toast.POSITION.TOP_RIGHT,
-            autoClose: 10000,
+            autoClose: 5000,
             hideProgressBar: true,
           });
           // setSelectedImage(response.data.avatar);
@@ -494,27 +496,28 @@ export default function InterviewPrep() {
       axios
         .request(config)
         .then((response) => {
+          localStorage.setItem('initialquestpopup', false)
           toast.success("Resume saved successfully", {
             position: toast.POSITION.TOP_RIGHT,
-            autoClose: 10000,
+            autoClose: 5000,
             hideProgressBar: true,
           });
           setupload(false);
-          setLoading(true)
-          dispatch(getInitiationQuestions())
-          .then((result) => {
-            setLoading(false)
-            console.log(result.payload, "favdata");
-            const data = result?.payload;
-            if (data.length > 0) {
-              setWelcome1(false);
-            } else {
-              setWelcome1(true);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          // setLoading(true)
+          // dispatch(getInitiationQuestions())
+          // .then((result) => {
+          //   setLoading(false)
+          //   console.log(result.payload, "favdata");
+          //   const data = result?.payload;
+          //   if (data.length > 0) {
+          //     setWelcome1(false);
+          //   } else {
+          //     setWelcome1(true);
+          //   }
+          // })
+          // .catch((error) => {
+          //   console.log(error);
+          // });
           
           // setSelectedImage(response.data.avatar);
         })
@@ -575,7 +578,7 @@ export default function InterviewPrep() {
         <ToastContainer />
         <Row className="smallscreen">
 
-          <Col className="prepText mt-lg-4 ms-lg-5 cursor" >Interview Preparation</Col>
+          <Col className="prepText mt-lg-4 ms-lg-5" >Interview Preparation</Col>
           <Col className="d-flex justify-content-end  mt-lg-2 me-lg-5 mx-auto"> <Button className='inteviewbtncss ' type="submit" onClick={newInterviewPrep}>New Interview Preparation <Image src={arrow} className="arrimg" /></Button></Col>
         </Row>
 
@@ -598,9 +601,10 @@ export default function InterviewPrep() {
         </div>
 
         {showSaved && (
-          <Row className="ps-5">
+          
+          <Row className="ps-lg-5 ps-xl-5">
             {savedInterview?.map((item) => (
-              <Col xl={3} className="my-lg-3">
+              <Col xl={3} lg={3} sm={12} className="my-3">
                 <div className="savedcard">
                   <Card className="ps-1 cardBody pb-2">
                     <Card.Body className="">
@@ -629,9 +633,9 @@ export default function InterviewPrep() {
         )}
 
         {showFav && (
-          <Row className="ps-5">
+          <Row className="ps-lg-5 ps-xl-5">
             {favData?.map((item) => (
-              <Col xl={3} className="  my-lg-4 ">
+              <Col xl={3} lg={3} sm={12} className="my-3">
                 <div className="interviewcard">
                   <Card className="cardBody">
                     <Card.Body>

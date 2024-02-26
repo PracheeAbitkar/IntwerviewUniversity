@@ -121,6 +121,11 @@
   background-image: none !important;
 }
 
+.form-control.is-valid, .was-validated .form-control:valid {
+ 
+  background-image: none !important;
+}
+
 @media (max-width:991px) {
 
   .footerimg {

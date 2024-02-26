@@ -199,12 +199,19 @@ export default function About() {
         <Row className="no-gutters">
         <Col xs={12} lg={12} className="text-col ps-lg-5 mt-3">
             <div className="about-us-text">
-              <span className='headerAbout '>  <span className='d-lg-flex justify-content-center'><Image variant="top" src={rectangle} fluid
-                className="about-us-image" /></span>
+              <span className='headerAbout '>  <span className='d-lg-flex justify-content-center'>
+                <Image variant="top" src={rectangle} fluid className="about-us-image" /></span>
                 <h2 className='uniquetext'>Our Unique Journey</h2></span>
              
             </div>
           </Col>
+        </Row>
+        <Row>
+        <Col xs={12} lg={12} className="image-col">
+            <Image variant="top" src={uniquejourney} fluid 
+              className="journyimg" />
+          </Col>
+        
         </Row>
         <Row>
           <Col xs={12} lg={12} className="text-col">

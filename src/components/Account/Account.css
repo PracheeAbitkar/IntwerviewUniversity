@@ -200,6 +200,14 @@
     cursor: pointer;
 }
 
+.accountphoto {
+    font-family: 'DMSans-Regular';
+    font-size: 12px;
+    padding-top: 5px;
+    color: rgba(0, 0, 0, 1);
+    display: flex;
+    justify-content: center;
+}
 .cameraimage {
 
     background-color: white;
@@ -286,6 +294,7 @@
         display: flex;
         justify-content: center;
         margin-bottom: 10px;
+        flex-direction: column;
     }
 
     .header-profile {
@@ -313,6 +322,7 @@
     .flexAccount {
         display: flex;
         justify-content: center;
+        flex-direction: column;
     }
 
     .header-profile {

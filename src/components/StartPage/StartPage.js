@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Button, Card, Col, Form, Image, Row, Container, CardDeck } from "react-bootstrap";
 import google from '../../assets/images/google.svg'
 import apple from '../../assets/images/apple.svg'
@@ -25,7 +25,13 @@ const StartPage = () => {
 
   const navigate = useNavigate();
 
+  const isAuthenticated = () => {
+    return sessionStorage.getItem('isAuthenticated') || localStorage.getItem('isAuthenticated') !== null ? true : false
+  }
 
+  useEffect(()=>{
+    if(isAuthenticated()) navigate("/interview")
+  },[])
 
   const responseFacebook = (accessToken) => {
 
@@ -246,28 +252,35 @@ const StartPage = () => {
     position: 'absolute',
     top: 110,
     right: 0,
-    bottom: 0,
-    left: 105,
+    bottom: 230,
+     left: 105,
     backgroundImage: `url(${ellipse})`,
     backgroundRepeat: 'no-repeat',
+    // backgroundSize: 'cover',
+    // width: '90%',
+    // backgroundSize: 'auto',
   };
 
   const backgroundImageStyle1 = {
     position: 'absolute',
     top: 300,
     right: 0,
-    bottom: 0,
-    left: 986,
+    bottom: 240,
+     left: 985,
     backgroundImage: `url(${blue})`,
     backgroundRepeat: 'no-repeat',
+    // width: '100%',
+    // backgroundSize: 'auto',
   };
 
+
+  
   return (
  
       <Container fluid className="d-flex justify-content-center align-items-center py-5 login">
-        <div style={{ width: '10px', height: '10px' }}>
+         <div style={{ width: '10px', height: '10px' }}>
           <div style={backgroundImageStyle}></div></div>
-        <div style={{ width: '10px', height: '10px' }}>
+          <div style={{ width: '10px', height: '10px' }}>
           <div style={backgroundImageStyle1}></div></div>
         <span className='loginrow'>
 
@@ -300,6 +313,7 @@ const StartPage = () => {
                         usePopup={true}
                         callback={signInWithApple}
                         scope="email name"
+                        className='cursor'
                         responseMode="query"
                         render={renderProps => (
                           <button
@@ -315,7 +329,7 @@ const StartPage = () => {
                       />
                       {/* <FacebookLoginButton onFacebookLogin={responseFacebook} /> */}
 
-                      <Image src={google} alt="Image" className='socialgoogle' onClick={() => {
+                      <Image src={google} alt="Image" className='socialgoogle cursor' onClick={() => {
                         handleGoogleSignInAPI()
                       }} />
                     </div>

@@ -29,9 +29,9 @@ const LogIn = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = () => {
-    return localStorage.getItem('isAuthenticated') !== null ? true : false
+    return sessionStorage.getItem('isAuthenticated') || localStorage.getItem('isAuthenticated') !== null ? true : false
   }
-console.log("authicated",isAuthenticated())
+
   useEffect(()=>{
     if(isAuthenticated()) navigate("/interview")
   },[])
@@ -103,7 +103,7 @@ console.log("authicated",isAuthenticated())
     // Reset form fields and errors
     setEmail('');
     setPassword('');
-    setRememberMe(false);
+    //setRememberMe(false);
     setErrors({});
     const body = {
       email: email?.toLowerCase(),
@@ -116,6 +116,20 @@ console.log("authicated",isAuthenticated())
         if (result.payload.key) {
           navigate('/interview')
           localStorage.setItem('initialquestpopup', true)
+
+
+          if (rememberMe) {
+            // Store token in session storage if "Remember me" is checked
+           console.log("sess")
+           localStorage.setItem('isAuthenticated',true)
+            
+          } else {
+            console.log("local")
+            // Store token in local storage if "Remember me" is not checked
+            sessionStorage.setItem('isAuthenticated',true)
+          }
+
+        
         
           dispatch(getUserProfile())
             .then((result) => {
@@ -392,7 +406,8 @@ console.log("authicated",isAuthenticated())
 
     <Container fluid className="d-flex justify-content-center align-items-center py-5 login">
       <div style={{ width: '10px', height: '10px' }}>
-        <div style={backgroundImageStyle}></div></div>
+        <div style={backgroundImageStyle}></div>
+        </div>
       <div style={{ width: '10px', height: '10px' }}>
         <div style={backgroundImageStyle1}></div></div>
       <span className='loginrow'>
@@ -428,6 +443,7 @@ console.log("authicated",isAuthenticated())
                       usePopup={true}
                       callback={signInWithApple}
                       scope="email name"
+                      className='cursor'
                       responseMode="query"
                       render={renderProps => (
                         <button
@@ -443,7 +459,7 @@ console.log("authicated",isAuthenticated())
                     />
                     {/* <FacebookLoginButton onFacebookLogin={responseFacebook} /> */}
 
-                    <Image src={google} alt="Image" className='socialgoogle' onClick={() => {
+                    <Image src={google} alt="Image" className='socialgoogle cursor' onClick={() => {
                       handleGoogleSignInAPI()
                     }} />
                   </div>

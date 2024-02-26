@@ -152,6 +152,11 @@ export default function Account() {
     };
     var moment = require('moment');
     const [phoneNumberError, setphoneNumberError] = useState('');
+
+    const genderChange = (e) =>{
+        setGenderOther(e.target.value)
+        setsavedisable(true)
+    }
     const handleFormSubmit = (event) => {
 
         event.preventDefault();
@@ -189,7 +194,7 @@ export default function Account() {
                                 formData.email = data.email;
                                 formData.full_name = data.full_name;
                                 formData.gender = data.gender;
-                                formData.phone_number = data.phone_number;
+                                //formData.phone_number = data.phone_number;
                                 formData.password = data.password;
                                 formData.linkedin = data.linkedin;
                                 formData.gender_other = data.gender_other;
@@ -243,8 +248,9 @@ export default function Account() {
                     <Col lg={4} className='d-none d-lg-block'>
                         <Sidebar />
                     </Col> */}
-            <Col xl={12} className='d-lg-none d-xl-none d-xl-block d-lg-block  d-flex justify-content-center'><Button className='myprofile' >My Profile</Button></Col>
+            <Col xl={12} className='d-lg-none d-xl-none d-xl-block d-lg-block  d-flex justify-content-center px-4 py-2 mb-3'><Button className='myprofile' >My Profile</Button></Col>
             {/* <Col lg={8} className='mt-5'> */}
+            <div className="px-4">
             <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
                 <ToastContainer />
                 <Row>
@@ -269,7 +275,9 @@ export default function Account() {
                             </div>
                         </div>
                         <span className='flexAccount'>
-                            <Button className='quotebtncss ' type="button" onClick={handleButtonClick} >Upload Picture</Button></span>
+                            <Button className='quotebtncss ' type="button" onClick={handleButtonClick} >Upload Picture</Button>
+                            <p className="accountphoto">max-size: 10mb</p>
+                            </span>
                     </Col>
                     <Col lg={8}>
                         <div className="row mb-2 account-row">
@@ -351,7 +359,7 @@ export default function Account() {
                                         <option value="">{otherGender ? "Other Gender" : "Select Gender"}</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
-                                        <option value="Others">Others</option>
+                                        <option value="Others">Other</option>
                                     </Form.Control>
                                     <Form.Control.Feedback type="invalid">
                                         Please select an gender
@@ -365,13 +373,14 @@ export default function Account() {
                                             //   className='textcontainer'
                                             name='gender'
                                             value={genderOther}
-                                            onChange={(e) => setGenderOther(e.target.value)}
+                                            onChange={genderChange}
                                             required
                                         />
                                         <Form.Control.Feedback type="invalid">Please enter gender</Form.Control.Feedback>
                                     </Form.Group>}
                             </div>
-                            <div className="col-sm" style={{ paddingTop: 5 }}>
+                            <div className="col-sm" ></div>
+                            {/* <div className="col-sm" style={{ paddingTop: 5 }}>
                                 <Form.Group controlId="exampleForm.SelectCustom">
                                     <Form.Label className="text-start labelcss">Phone Number<span class="required">*</span></Form.Label>
                                     <Form.Control
@@ -386,7 +395,7 @@ export default function Account() {
                                     {errors.phoneNumberError && <p className='step-error'>{errors.phoneNumberError}</p>}
                                     <Form.Control.Feedback type="invalid">Please enter valid number</Form.Control.Feedback>
                                 </Form.Group>
-                            </div>
+                            </div> */}
                         </div>
                     </Col>
                 </Row>
@@ -398,7 +407,7 @@ export default function Account() {
 
                 </span>
 
-            </Form>
+            </Form></div>
             {/* </Col> */}
             {/* </Row>
             </Container> */}

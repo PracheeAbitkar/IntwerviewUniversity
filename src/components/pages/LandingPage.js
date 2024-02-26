@@ -77,8 +77,8 @@ export default function LandingPage() {
                     </Col>
                     <Col xs={12} lg={5} className="text-col">
                     <span className='d-flex d-md-block d-xl-block d-lg-block  justify-content-center'> <Image  variant="top" src={rectangle} /></span>
-                        <span className='featuretxt d-flex d-md-block d-xl-block d-lg-block  justify-content-center'>Credibility boost</span>
-                        <p className='customtxt'>Multiple offers yield increased negotiating leverage, don’t leave $1000’s on the table</p>
+                        <span className='featuretxt d-flex d-md-block d-xl-block d-lg-block  justify-content-center'>
+                        Multiple offers yield increased negotiating leverage, don’t leave $1000’s on the table</span>
 
                     </Col>
                 </Row>
