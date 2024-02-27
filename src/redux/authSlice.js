@@ -498,19 +498,19 @@ const authSlice = createSlice({
         [forgetPassword.fulfilled]: (state, { payload: { error, msg } }) => {
             state.loading = false;
             if (msg) {
-                toast.success('Email Sent Sucessfully!', {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                });
+                // toast.success('Email Sent Sucessfully!', {
+                //     position: toast.POSITION.TOP_RIGHT,
+                //     autoClose: 2000,
+                //     hideProgressBar: true,
+                // });
             }
             if (error) {
-                state.error = error
-                toast.error(error, {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                });
+                // state.error = error
+                // toast.error(error, {
+                //     position: toast.POSITION.TOP_RIGHT,
+                //     autoClose: 2000,
+                //     hideProgressBar: true,
+                // });
             } else {
                 state.msg = msg
 

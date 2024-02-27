@@ -280,6 +280,9 @@
         height: 250px;
 
     }
+    .forgetcss{
+        width: 400px;
+    }
 }
 
 @media (max-width:650px) {
@@ -289,6 +292,9 @@
         text-align: left;
         box-shadow: 0px 4px 5px 0px #4B4B4B;
         /* height: 346px !important; */
+    }
+    .forgetcss{
+        width: 250px !important;
     }
 
     .loginContainer{
@@ -401,6 +407,9 @@
 }
 
 @media (max-width:290px) {
+    .forgetcss{
+        width: 250px !important;
+    }
     .logincard {
         width: 28rem !important;
         background-color: #FFFFFF;

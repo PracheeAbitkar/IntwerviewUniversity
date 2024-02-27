@@ -384,7 +384,7 @@ const LogIn = () => {
 
   const backgroundImageStyle = {
     position: 'absolute',
-    top: 110,
+    top: 80,
     right: 0,
     bottom: 0,
     left: 155,
@@ -397,7 +397,7 @@ const LogIn = () => {
     top: 300,
     right: 0,
     bottom: 0,
-    left: 986,
+    left: 1000,
     backgroundImage: `url(${blue})`,
     backgroundRepeat: 'no-repeat',
   };

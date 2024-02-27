@@ -134,6 +134,11 @@ export default function Header() {
     setMenuDisplay(false)
   }
 
+  const interviewClick=()=>{
+    navigate('/interview')
+    setMenuDisplay(false)
+  }
+
   const experience = () => {
     navigate('/experience')
     setMenuDisplay(false)
@@ -280,7 +285,7 @@ export default function Header() {
                   <Nav.Link className='modaltext mt-2 text-center'>Greesky Schweirald</Nav.Link></div>
 
                 <div className='text-center mt-5'>
-                  <Nav.Link className='navHeader mb-2 mt-5'>Interview Preparation</Nav.Link><hr />
+                  <Nav.Link className='navHeader mb-2 mt-5'  onClick={interviewClick}>Interview Preparation</Nav.Link><hr />
                   <Nav.Link className='navHeader my-2' onClick={profileClick}>My Profile</Nav.Link><hr />
                   <Nav.Link className='navHeader my-2' onClick={experience}>Professional Experience</Nav.Link><hr />
                   <Nav.Link className='navHeader my-2' onClick={feedbackClick}>Support/ Send Feedback</Nav.Link><hr />
@@ -371,7 +376,7 @@ export default function Header() {
               </span>
               <span>
                 <Button className='savebtn' type="submit me-3"  onClick={deleteAccount}>Yes</Button>
-                <Button className='savebtn' type="submit"  >No</Button>
+                <Button className='cancelbtn' type="submit" style={{ marginLeft: 5 }} onClick={handleClose2} >No</Button>
               </span>
             </div>
           </Modal.Body>

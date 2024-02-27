@@ -472,10 +472,10 @@ export default function SignUp() {
 
     const backgroundImageStyle = {
         position: 'absolute',
-        top: 110,
+        top: 80,
         right: 0,
         bottom: 0,
-        left: 155,
+        left: 100,
         backgroundImage: `url(${ellipse})`,
         backgroundRepeat: 'no-repeat',
     };
@@ -485,7 +485,7 @@ export default function SignUp() {
         top: 300,
         right: 0,
         bottom: 0,
-        left: 986,
+        left: 1080,
         backgroundImage: `url(${blue})`,
         backgroundRepeat: 'no-repeat',
     };
