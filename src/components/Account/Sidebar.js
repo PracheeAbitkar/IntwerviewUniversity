@@ -140,7 +140,7 @@ export default function Sidebar() {
                                     <Nav.Item key={item.id} onClick={() => handleItemClick(item.id)}
                                         className={`${selectedItem === item.id ? 'selected-line' : 'navcss'}`}
                                     >
-                                        <Nav.Link href="#section1" className={`navText ${selectedItem === item.id ? 'activetext' : 'notactive'}`} >{item.name}</Nav.Link>
+                                        <Nav.Link  className={`navText ${selectedItem === item.id ? 'activetext' : 'notactive'}`} >{item.name}</Nav.Link>
                                     </Nav.Item>
 
                                 ))}

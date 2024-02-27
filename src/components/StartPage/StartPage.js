@@ -250,7 +250,7 @@ const StartPage = () => {
 
   const backgroundImageStyle = {
     position: 'absolute',
-    top: 110,
+    top: 90,
     right: 0,
     bottom: 230,
      left: 105,
@@ -263,10 +263,10 @@ const StartPage = () => {
 
   const backgroundImageStyle1 = {
     position: 'absolute',
-    top: 300,
+    top: 240,
     right: 0,
     bottom: 240,
-     left: 985,
+     left: 1050,
     backgroundImage: `url(${blue})`,
     backgroundRepeat: 'no-repeat',
     // width: '100%',

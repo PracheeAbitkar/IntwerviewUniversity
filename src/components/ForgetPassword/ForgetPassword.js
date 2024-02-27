@@ -19,7 +19,7 @@ const ForgetPassword = () => {
     const dispatch = useDispatch();
     let navigate = useNavigate();
     const response = useSelector((state) => state);
-    
+    const [showForget, setshowForget] = useState(true);
 
     useEffect(() => {
         if (response.user.msg === "password reset link send. Please check your email response from forget") {
@@ -61,12 +61,37 @@ const ForgetPassword = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(forgetPassword(body))
+        
         const validationErrors = {}
 
         if (!isEmailValid(email)) {
             validationErrors.email = "Please enter a valid email address.";
         }
+        dispatch(forgetPassword(body))
+        .then((result) => {
+            console.log(result,"result")
+            if(result?.payload?.non_field_errors){
+                toast.error(result?.non_field_errors[0], {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                });
+            }
+
+            if(result?.payload?.msg){
+                setshowForget(false)
+                toast.success(result?.payload?.msg, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                });
+            }
+           
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+        
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors)
 
@@ -78,7 +103,7 @@ const ForgetPassword = () => {
 
     const backgroundImageStyle = {
         position: 'absolute',
-        top: 110,
+        top: 80,
         right: 0,
         bottom: 240,
         left: 155,
@@ -88,7 +113,7 @@ const ForgetPassword = () => {
 
     const backgroundImageStyle1 = {
         position: 'absolute',
-        top: 300,
+        top: 240,
         right: 0,
         bottom: 250,
         left: 986,
@@ -103,7 +128,7 @@ const ForgetPassword = () => {
                 <div style={backgroundImageStyle1}></div></div>
             <span className='loginrow'>
                 <Row className="no-gutters mx-1 " >
-                    <Col className="d-flex" xl={6}>
+                    <Col className="d-flex d-none d-lg-block" xl={6}>
                         <Card className="flex-fill no-margin loginImage box-shadow">
                             <Card.Body>
                                 <div className='logocss loginmargin1'>
@@ -123,7 +148,7 @@ const ForgetPassword = () => {
                                 <ToastContainer />
 
                                 <Form  onSubmit={handleSubmit}>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                   {showForget?<> <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label className="text-start labelcss">
                                         Email Address<span class="required">*</span>
                                         </Form.Label>
@@ -143,7 +168,17 @@ const ForgetPassword = () => {
                                         className='btncss'
                                     >
                                         Reset Password
-                                    </Button>
+                                    </Button></>:<>
+                                    <p className="labelcss px-3 forgetcss">We have sent instructions to reset your password to 
+                                        the email address associated with your account. </p>
+                                        
+                                     <Button
+                                     type="submit"
+                                     className='btncss'
+                                 >
+                                     Resend Email
+                                 </Button></>
+                                    }
                                     <p className="text-center mt-2 ">
                                     <Link to="/login" state={{}} className="my-2 text-center backbtn">
                                         

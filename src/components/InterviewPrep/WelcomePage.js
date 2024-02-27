@@ -323,7 +323,7 @@ export default function WelcomePage({ closeModal }) {
                 </div>
               </div>
 
-              <div className="row mb-2 account-row">
+              <div className="row mb-2">
                 <div className="col-sm">
                   <Form.Group controlId="exampleForm.SelectCustom">
                     <Form.Label className="d-flex labelcss">Email Address<span class="required">*</span></Form.Label>
@@ -360,7 +360,7 @@ export default function WelcomePage({ closeModal }) {
                 </div>
               </div> */}
 
-              <div className="row mb-2 account-row">
+              <div className="row mb-2">
                 <div className="col-sm" style={{ paddingTop: 5 }}>
                   <Form.Group controlId="exampleForm.SelectCustom">
                     <Form.Label className="d-flex labelcss">Linkedin Url (Optional)</Form.Label>
@@ -404,7 +404,7 @@ export default function WelcomePage({ closeModal }) {
                 </div>
               </div>
 
-              <div className="row mb-2 account-row">
+              <div className="row mb-2">
                 <div className="col-sm">
                   <Form.Group controlId="exampleForm.SelectCustom">
                     <Form.Label className="d-flex labelcss">Preferred Industry</Form.Label>
@@ -420,7 +420,7 @@ export default function WelcomePage({ closeModal }) {
                   </Form.Group>
                 </div>
               </div>
-              <div className="row mb-2 account-row">
+              <div className="row mb-2">
 
                 <div className="col-sm" style={{ paddingTop: 5 }}>
                   <Form.Group controlId="exampleForm.SelectCustom">
@@ -437,7 +437,7 @@ export default function WelcomePage({ closeModal }) {
                   </Form.Group>
                 </div>
               </div>
-              <div className="row mb-2 account-row">
+              <div className="row mb-2">
 
                 <div className="col-sm-3" style={{ paddingTop: 5 }}>
                   <Form.Group controlId="exampleForm.SelectCustom">

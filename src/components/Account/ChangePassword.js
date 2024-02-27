@@ -379,7 +379,7 @@ const ChangePassword = () => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group >
+            <Form.Group className="updateButton">
               <Button className='savebtn1' type="submit"  >Update Password</Button>
             </Form.Group>
           </Form>
